@@ -5,7 +5,7 @@
         "menu": {
             "home": "Home",
             "account": {
-                "main": "Account",
+                "main": "Cont",
                 "settings": "Settings",
                 "password": "Password",
                 "sessions": "Sessions",
@@ -18,8 +18,8 @@
                 "apidocs": "API",
                 "register": "Register"
             },
-            "admin": "Administration",
-            "language": "Language"
+            "admin": "Administrare",
+            "language": "Limba"
         },
         "language": {
             "en": "English",

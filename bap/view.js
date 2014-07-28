@@ -1,18 +1,28 @@
-string = {value : 'string', display: 'string'};
-filterEntity ={ids: 'string', names: 'string', display: 'filterDateRange'};
+// Data types
+string = {dataType: 'string'};
+filterEntity ={dataType: 'filterEntity'};
+
+//Action types
+openModal = {actionType: 'openModal'};
+refreshGrid = {actionType: 'refreshGrid'}
+// View types
+form = {viewType: 'form'};
+grid = {viewType: 'grid'};
+
+
 
 view = {
 		'requestMainFilter': {
-			type: 'form',
+			type: form,
 			'creationDate': 'filterDateRange',
 			'customers': {
 				type: filterEntity,
 				readOnly: true,
 				action: {
 					'openCustomerFilter': {
-						type: 'openModal',
-						view: 'customerFilter',
+						type: openModal,
 						inputBinding: {
+							'viewId': 'customerFilter',
 							'multiSelect': false
 						},
 						outputBinding: {
@@ -26,28 +36,28 @@ view = {
 			}
 		},
 		'customerFilter':{
-			type: 'form',
+			type: form,
 			input: {
 				'multiSelect': true
 			},
 			'criteria':{
-				type: 'form',
+				type: form,
 				'name': 'string'
 			},
 			action:{
 				"search":{
-					type: 'refreshGrid',
-					gridId: 'customerResult'
+					type: refreshGrid,
+					inputBinding: {gridId: 'customerResult'}
 				}
 			},
 			'customerResult':{
-				type:'grid',
+				type:grid,
 				'name': string
 			}
 
 		},
 		'requestMain':{
-			model: 'Request',
+			model: 'Request'
 		}
 
 

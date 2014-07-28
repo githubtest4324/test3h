@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
@@ -25,7 +24,7 @@ import com.fasterxml.jackson.datatype.joda.deser.LocalDateDeserializer;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Order implements Serializable {
+public class Request implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -67,7 +66,7 @@ public class Order implements Serializable {
             return false;
         }
 
-        Order order = (Order) o;
+        Request order = (Request) o;
 
         if (id != order.id) {
             return false;
@@ -109,5 +108,13 @@ public class Order implements Serializable {
 
 	public void setExpectedDeliveryDate(LocalDate expectedDeliveryDate) {
 		this.expectedDeliveryDate = expectedDeliveryDate;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 }

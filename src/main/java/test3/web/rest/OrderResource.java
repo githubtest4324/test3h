@@ -1,7 +1,7 @@
 package test3.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import test3.domain.Order;
+import test3.domain.Request;
 import test3.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public class OrderResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public void create(@RequestBody Order order) {
+    public void create(@RequestBody Request order) {
         log.debug("REST request to save Order : {}", order);
         orderRepository.save(order);
     }
@@ -45,7 +45,7 @@ public class OrderResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Order> getAll() {
+    public List<Request> getAll() {
         log.debug("REST request to get all Orders");
         return orderRepository.findAll();
     }
@@ -57,9 +57,9 @@ public class OrderResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Order> get(@PathVariable Long id, HttpServletResponse response) {
+    public ResponseEntity<Request> get(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get Order : {}", id);
-        Order order = orderRepository.findOne(id);
+        Request order = orderRepository.findOne(id);
         if (order == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -33,8 +33,8 @@ public class Tariff implements Serializable {
     
     private Double quantity;
     
-    @ManyToOne(targetEntity=Order.class)
-    private Order order;
+    @ManyToOne(targetEntity=Request.class)
+    private Request order;
     
     public long getId() {
         return id;

@@ -1,7 +1,7 @@
 var model = {
 		Request:{
 			id:{
-				type:'long'
+				type:'id'
 			},
 			creationDate: {
 				type:'date',
@@ -11,15 +11,23 @@ var model = {
 				isArray: true,
 				type: 'Tariff',
 				mappedBy: 'request',
-				readOnly: true
+			},
+			customer: {
+				type: 'Customer'
 			}
 		},
 		Tariff: {
 			id: {
-				type: 'long'
+				type: 'id'
 			},
 			request: {
 				type: 'Request'
 			}
+		},
+		Customer: {
+			id: {
+				type: 'id'
+			},
 		}
 };
+

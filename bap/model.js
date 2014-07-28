@@ -14,7 +14,7 @@ var model = {
 			request: 'Request'
 		},
 		Customer: {
-			id:'id',
+			id:'id'
 		}
 };
 

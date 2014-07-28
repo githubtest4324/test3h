@@ -1,15 +1,12 @@
-// Data types
-string = {dataType: 'string'};
-filterEntity ={dataType: 'filterEntity'};
 
-//Action types
-openModal = {actionType: 'openModal'};
-refreshGrid = {actionType: 'refreshGrid'}
-// View types
-form = {viewType: 'form'};
-grid = {viewType: 'grid'};
+var fs = require('fs');
+var vm = require('vm');
+function include(path) {
+    var code = fs.readFileSync(path, 'utf-8');
+    vm.runInThisContext(code, path);
+}
 
-
+include('declarations.js');
 
 view = {
 		'requestMainFilter': {
@@ -63,3 +60,5 @@ view = {
 
 
 };
+
+console.log(view);

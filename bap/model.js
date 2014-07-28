@@ -18,3 +18,4 @@ var model = {
 		}
 };
 
+console.log(model);

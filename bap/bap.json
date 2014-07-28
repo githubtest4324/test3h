@@ -1,0 +1,21 @@
+{
+    "model":{
+        "Ord":{
+            "fields":[
+                {
+                    "name":"creationDate",
+                    "type":"date",
+                    "readOnly":true
+                },
+                {
+                    "name":"creationDate2",
+                    "type":"date",
+                    "readOnly":true
+                }
+                
+            ]
+            
+        }
+        
+    }
+}

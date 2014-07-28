@@ -1,9 +1,12 @@
+string = {value : 'string', display: 'string'};
+filterEntity ={ids: 'string', names: 'string', display: 'filterDateRange'};
+
 view = {
 		'requestMainFilter': {
 			type: 'form',
 			'creationDate': 'filterDateRange',
 			'customers': {
-				type: 'filterEntity',
+				type: filterEntity,
 				readOnly: true,
 				action: {
 					'openCustomerFilter': {
@@ -39,7 +42,7 @@ view = {
 			},
 			'customerResult':{
 				type:'grid',
-				columna
+				'name': string
 			}
 
 		},

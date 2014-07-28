@@ -48,6 +48,8 @@ public class Request implements Serializable {
 
     @ManyToOne(targetEntity=Customer.class)
     private Customer customer;
+
+    private String code;
     
     public long getId() {
         return id;
@@ -116,5 +118,13 @@ public class Request implements Serializable {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 }

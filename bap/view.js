@@ -1,18 +1,31 @@
 view = {
-		requestsMainFilter: {
+		'requestMainFilter': {
 			type: 'form',
 			model: {
-				creationDate: {
+				'creationDate': {
 					type: 'filterDateRange'
 				},
-				customer: {
-					type: 'Customer',
-					reference: 
+				'customers': {
+					type: 'filterEntity',
+					action: {
+						open: {view: 'customerFilter'},
+						output: {
+							'customers.ids': 'ids',
+							'customers.names': 'names'
+						}
+						
+					}  
 				}
 			}
 		},
-
-		requestsMain:{
+		'customerFilter':{
+			type: 'form',
+			{
+				type: 'form',
+				
+			}
+		},
+		'requestMain':{
 			model: 'Request',
 		}
 

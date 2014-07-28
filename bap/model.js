@@ -1,33 +1,20 @@
 var model = {
 		Request:{
-			id:{
-				type:'id'
-			},
+			id:'id',
 			creationDate: {
 				type:'date',
 				readOnly:true
 			},
-			tariffs: {
-				isArray: true,
-				type: 'Tariff',
-				mappedBy: 'request',
-			},
-			customer: {
-				type: 'Customer'
-			}
+			tariffs: 'Tariff[]',
+			customer: 'Customer',
+			code: 'string'
 		},
 		Tariff: {
-			id: {
-				type: 'id'
-			},
-			request: {
-				type: 'Request'
-			}
+			id: 'id',
+			request: 'Request'
 		},
 		Customer: {
-			id: {
-				type: 'id'
-			},
+			id:'id',
 		}
 };
 

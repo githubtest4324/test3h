@@ -1,4 +1,3 @@
-
 var fs = require('fs');
 var vm = require('vm');
 function include(path) {
@@ -8,57 +7,85 @@ function include(path) {
 
 include('declarations.js');
 
+
 view = {
-		'requestMainFilter': {
-			type: form,
-			'creationDate': 'filterDateRange',
-			'customers': {
-				type: filterEntity,
-				readOnly: true,
-				action: {
-					'openCustomerFilter': {
-						type: openModal,
-						inputBinding: {
-							'viewId': 'customerFilter',
-							'multiSelect': false
-						},
-						outputBinding: {
-							'customers.ids': 'ids',
-							'customers.names': 'names'
-						}
+    'requestMainFilter': {
+        type: form,
+        'creationDate': 'filterDateRange',
+        'customers': {
+            type: filterEntity,
+            readOnly: true,
+            actions: {
+                'openCustomerFilter': {
+                    type: openModal,
+                    before: {
+                        bind: {
+                            'input.viewId': 'customerFilter',
+                            'input.viewParameters': {
+                                'multiSelect': false
+                            }
+                        }
+                    },
+                    after: {
+                        bind: {
+                            'output.customers.ids': 'ids',
+                            'output.customers.names': 'names'
+                        }
+                    }
+                }
+            }
+        }
+    },
+    'customerFilter': {
+        type: form,
+        input: {
+            'multiSelect': {
+                type: boolean,
+                default: true,
+                bind: 'customerGrid.multiSelect'
+            }
+        },
+        output: {
+            'ids': string,
+            'names': string
+        },
+        actions: {
+            'search': {
+                type: refreshGrid,
+                before: {
+                    bind: {gridId: 'customerGrid'}
+                }
+            },
+            'ok': {
+                type: customAction,
+                before: {
+                    bind: {
+                        'output.ids': 'customerGrid.getSelectedIds()',
+                        'output.names': 'customerGrid.getSelectedValues("name")'
+                    },
+                    after: {
+                        'goBack': back
+                    }
+                }
+            },
+            'cancel': back
+        },
+        'criteria': {
+            type: form,
+            'name': string
+        },
+        'customerGrid': {
+            type: grid,
+            'name': string
+        }
 
-					}
-
-				}  
-			}
-		},
-		'customerFilter':{
-			type: form,
-			input: {
-				'multiSelect': true
-			},
-			'criteria':{
-				type: form,
-				'name': 'string'
-			},
-			action:{
-				"search":{
-					type: refreshGrid,
-					inputBinding: {gridId: 'customerResult'}
-				}
-			},
-			'customerResult':{
-				type:grid,
-				'name': string
-			}
-
-		},
-		'requestMain':{
-			model: 'Request'
-		}
+    },
+    'requestMain': {
+        model: 'Request'
+    }
 
 
 
 };
 
-console.log(view);
+console.log(JSON.stringify(view, undefined, 2));

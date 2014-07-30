@@ -33,7 +33,7 @@ var form = {viewType: 'form'};
 var grid = {
     viewType: 'grid',
     input: {
-        'multiSelect': {type: boolean, default: true}
+        'multiSelect': {type: boolean, defaultValue: true}
     },
     methods: {
         getSelectedIds: {

@@ -11,9 +11,11 @@ include('declarations.js');
 view = {
     'requestMainFilter': {
         type: form,
-        'filter': {
+        // Criteria
+        'criteria': {
             type: form,
             'creationDate': 'filterDateRange',
+            'code': string,
             'customers': {
                 type: filterEntity,
                 readOnly: true,
@@ -36,6 +38,7 @@ view = {
                 }
             }
         },
+        // Search action
         'search':{
             type: refreshGrid,
             before: {
@@ -44,6 +47,7 @@ view = {
                 }
             }
         },
+        // Grid
         'requestGrid':{
             type: grid,
             'id': id,
@@ -59,7 +63,7 @@ view = {
         input: {
             'multiSelect': {
                 type: boolean,
-                default: true,
+                defaultValue: false,
                 bind: 'customerGrid.multiSelect'
             }
         },

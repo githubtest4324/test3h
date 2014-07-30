@@ -32,7 +32,7 @@ public class Request implements Serializable {
     private long id;
 
     @OneToMany(mappedBy="order")
-    private Set<Tariff> tariffs;
+    private Set<Service> services;
     
     @NotNull
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
@@ -88,14 +88,6 @@ public class Request implements Serializable {
                 "id=" + id +"}";
     }
 
-	public Set<Tariff> getTariffs() {
-		return tariffs;
-	}
-
-	public void setTariffs(Set<Tariff> tariffs) {
-		this.tariffs = tariffs;
-	}
-
 	public LocalDate getCreationDate() {
 		return creationDate;
 	}
@@ -126,5 +118,13 @@ public class Request implements Serializable {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public Set<Service> getServices() {
+		return services;
+	}
+
+	public void setServices(Set<Service> services) {
+		this.services = services;
 	}
 }

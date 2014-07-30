@@ -1,8 +1,8 @@
 'use strict';
 
-test3hipsterApp.factory('Order', ['$resource',
+test3hipsterApp.factory('RequestMainFilter', ['$resource',
     function ($resource) {
-        return $resource('app/rest/orders/:id', {}, {
+        return $resource('app/rest/requests/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'get': { method: 'GET'}
         });

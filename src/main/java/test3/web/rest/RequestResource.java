@@ -2,7 +2,7 @@ package test3.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import test3.domain.Request;
-import test3.repository.OrderRepository;
+import test3.repository.RequestRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -15,66 +15,66 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * REST controller for managing Order.
+ * REST controller for managing Request.
  */
 @RestController
 @RequestMapping("/app")
-public class OrderResource {
+public class RequestResource {
 
-    private final Logger log = LoggerFactory.getLogger(OrderResource.class);
+    private final Logger log = LoggerFactory.getLogger(RequestResource.class);
 
     @Inject
-    private OrderRepository orderRepository;
+    private RequestRepository requestRepository;
 
     /**
-     * POST  /rest/orders -> Create a new order.
+     * POST  /rest/requests -> Create a new request.
      */
-    @RequestMapping(value = "/rest/orders",
+    @RequestMapping(value = "/rest/requests",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public void create(@RequestBody Request order) {
-        log.debug("REST request to save Order : {}", order);
-        orderRepository.save(order);
+    public void create(@RequestBody Request request) {
+        log.debug("REST request to save Request : {}", request);
+        requestRepository.save(request);
     }
 
     /**
-     * GET  /rest/orders -> get all the orders.
+     * GET  /rest/requests -> get all the requests.
      */
-    @RequestMapping(value = "/rest/orders",
+    @RequestMapping(value = "/rest/requests",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public List<Request> getAll() {
-        log.debug("REST request to get all Orders");
-        return orderRepository.findAll();
+        log.debug("REST request to get all Requests");
+        return requestRepository.findAll();
     }
 
     /**
-     * GET  /rest/orders/:id -> get the "id" order.
+     * GET  /rest/requests/:id -> get the "id" request.
      */
-    @RequestMapping(value = "/rest/orders/{id}",
+    @RequestMapping(value = "/rest/requests/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Request> get(@PathVariable Long id, HttpServletResponse response) {
-        log.debug("REST request to get Order : {}", id);
-        Request order = orderRepository.findOne(id);
-        if (order == null) {
+        log.debug("REST request to get Request : {}", id);
+        Request request = requestRepository.findOne(id);
+        if (request == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(order, HttpStatus.OK);
+        return new ResponseEntity<>(request, HttpStatus.OK);
     }
 
     /**
-     * DELETE  /rest/orders/:id -> delete the "id" order.
+     * DELETE  /rest/requests/:id -> delete the "id" request.
      */
-    @RequestMapping(value = "/rest/orders/{id}",
+    @RequestMapping(value = "/rest/requests/{id}",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public void delete(@PathVariable Long id) {
-        log.debug("REST request to delete Order : {}", id);
-        orderRepository.delete(id);
+        log.debug("REST request to delete Request : {}", id);
+        requestRepository.delete(id);
     }
 }

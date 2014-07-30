@@ -6,6 +6,6 @@ import test3.domain.Request;
 /**
  * Spring Data JPA repository for the Order entity.
  */
-public interface OrderRepository extends JpaRepository<Request, Long> {
+public interface RequestRepository extends JpaRepository<Request, Long> {
 
 }

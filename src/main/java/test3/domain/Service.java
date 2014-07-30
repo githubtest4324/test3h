@@ -8,18 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-/**
- * A Tariff.
- */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Tariff implements Serializable {
+public class Service implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -54,9 +50,9 @@ public class Tariff implements Serializable {
             return false;
         }
 
-        Tariff Tariff = (Tariff) o;
+        Service service = (Service) o;
 
-        if (id != Tariff.id) {
+        if (id != service.id) {
             return false;
         }
 

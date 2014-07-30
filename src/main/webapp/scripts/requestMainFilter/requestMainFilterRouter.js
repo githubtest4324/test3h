@@ -4,13 +4,13 @@ test3hipsterApp
     .config(['$routeProvider', '$httpProvider', '$translateProvider', 'USER_ROLES',
         function ($routeProvider, $httpProvider, $translateProvider, USER_ROLES) {
             $routeProvider
-                .when('/order', {
-                    templateUrl: 'views/orders.html',
-                    controller: 'OrderController',
+                .when('/requestMainFilter', {
+                    templateUrl: 'views/requestMainFilter.html',
+                    controller: 'RequestMainFilterController',
                     resolve:{
-                        resolvedOrder: ['Order', function (Order) {
-                            return Order.query();
-                        }]
+//                        resolvedOrder: ['RequestMainFilter', function (RequestMainFilter) {
+//                            return RequestMainFilter.query();
+//                        }]
                     },
                     access: {
                         authorizedRoles: [USER_ROLES.all]

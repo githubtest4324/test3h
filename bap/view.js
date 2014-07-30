@@ -11,11 +11,12 @@ include('declarations.js');
 view = {
     'requestMainFilter': {
         type: form,
-        'creationDate': 'filterDateRange',
-        'customers': {
-            type: filterEntity,
-            readOnly: true,
-            actions: {
+        'filter': {
+            type: form,
+            'creationDate': 'filterDateRange',
+            'customers': {
+                type: filterEntity,
+                readOnly: true,
                 'openCustomerFilter': {
                     type: openModal,
                     before: {
@@ -34,7 +35,24 @@ view = {
                     }
                 }
             }
+        },
+        'search':{
+            type: refreshGrid,
+            before: {
+                bind: {
+                    'gridId': 'requestGrid'
+                }
+            }
+        },
+        'requestGrid':{
+            type: grid,
+            'id': id,
+            'code': string,
+            'creationDate': date,
+            'expectedDeliveryDate': date,
+            'customer': string
         }
+
     },
     'customerFilter': {
         type: form,
@@ -49,35 +67,37 @@ view = {
             'ids': string,
             'names': string
         },
-        actions: {
-            'search': {
-                type: refreshGrid,
-                before: {
-                    bind: {gridId: 'customerGrid'}
-                }
-            },
-            'ok': {
-                type: customAction,
-                before: {
-                    bind: {
-                        'output.ids': 'customerGrid.getSelectedIds()',
-                        'output.names': 'customerGrid.getSelectedValues("name")'
-                    },
-                    after: {
-                        'goBack': back
-                    }
-                }
-            },
-            'cancel': back
-        },
+        // Criteria
         'criteria': {
             type: form,
             'name': string
         },
+        // Search Action
+        'search': {
+            type: refreshGrid,
+            before: {
+                bind: {gridId: 'customerGrid'}
+            }
+        },
+        // Grid
         'customerGrid': {
             type: grid,
             'name': string
-        }
+        },
+        // Ok/Cancel Actions
+        'ok': {
+            type: customAction,
+            before: {
+                bind: {
+                    'output.ids': 'customerGrid.getSelectedIds()',
+                    'output.names': 'customerGrid.getSelectedValues("name")'
+                },
+                after: {
+                    'goBack': back
+                }
+            }
+        },
+        'cancel': back
 
     },
     'requestMain': {
@@ -88,4 +108,4 @@ view = {
 
 };
 
-console.log(JSON.stringify(view, undefined, 2));
+console.log(JSON.stringify(view, null, 2));

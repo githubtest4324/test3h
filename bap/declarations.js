@@ -1,4 +1,5 @@
 // display
+var noDisplay = {displayType: 'noDisplay'};
 var label = {displayType: 'label'};
 var textInput = {displayType: 'textInput'};
 var checkBox = {displayType: 'checkBox'};
@@ -8,6 +9,7 @@ var filterEntityDisplay = {displayType: 'filterEntityDisplay'};
 var filterDateRangeDisplay = {displayType: 'filterDateRangeDisplay'};
 
 // variables
+var id = {variableType: 'string', display: noDisplay};
 var string = {variableType: 'string', display: textInput};
 var date = {variableType: 'date', display: datePicker};
 var boolean = {variableType: 'boolean', display: checkBox};

@@ -29,6 +29,7 @@ var filterDateRange = {
 };
 
 // views
+var page = {viewType: 'page'};
 var form = {viewType: 'form'};
 var grid = {
     viewType: 'grid',

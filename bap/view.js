@@ -10,7 +10,7 @@ include('declarations.js');
 
 view = {
     'requestMainFilter': {
-        type: form,
+        type: page,
         // Criteria
         'criteria': {
             type: form,

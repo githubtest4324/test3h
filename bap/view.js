@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs');
 var vm = require('vm');
 function include(path) {
@@ -8,7 +10,7 @@ function include(path) {
 include('declarations.js');
 
 
-view = {
+var view = {
     'requestMainFilter': {
         type: page,
         // Criteria
@@ -62,7 +64,7 @@ view = {
         type: form,
         input: {
             'multiSelect': {
-                type: boolean,
+                type: bool,
                 defaultValue: false,
                 bind: 'customerGrid.multiSelect'
             }
@@ -104,12 +106,18 @@ view = {
         'cancel': back
 
     },
-    'requestMain': {
-        model: 'Request'
-    }
+    'testModule': {
+        type: form,
+        't1': string,
+        'criteria': {
+            type: form,
+            'creationDate': filterDateRange
+        }
 
+    }
 
 
 };
 
 console.log(JSON.stringify(view, null, 2));
+

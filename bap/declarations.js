@@ -1,3 +1,15 @@
+var x1 = {
+    x2: "aaa",
+    x3: "bbb",
+    x4: 'ccc'
+};
+
+var y1 = {
+    x2: "aaa",
+    x3: "bbb",
+    x4: 'ccc'
+};
+
 // display
 var noDisplay = {displayType: 'noDisplay'};
 var label = {displayType: 'label'};
@@ -12,7 +24,7 @@ var filterDateRangeDisplay = {displayType: 'filterDateRangeDisplay'};
 var id = {variableType: 'string', display: noDisplay};
 var string = {variableType: 'string', display: textInput};
 var date = {variableType: 'date', display: datePicker};
-var boolean = {variableType: 'boolean', display: checkBox};
+var bool = {variableType: 'boolean', display: checkBox};
 var number = {variableType: 'number', display: textInput};
 var object = {variableType: 'object'};
 var filterEntity = {
@@ -34,7 +46,7 @@ var form = {viewType: 'form'};
 var grid = {
     viewType: 'grid',
     input: {
-        'multiSelect': {type: boolean, defaultValue: true}
+        'multiSelect': {type: bool, defaultValue: true}
     },
     methods: {
         getSelectedIds: {

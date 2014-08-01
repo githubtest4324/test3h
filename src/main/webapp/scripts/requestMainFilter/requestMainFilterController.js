@@ -34,7 +34,32 @@ test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMai
         $scope.customerFilter = {
             multiSelect: null,
             idsOut: null,
-            namesOut: null
+            namesOut: null,
+            criteria: {
+                name: null
+            },
+            search:{
+                gridId: null,
+                perform: function(){
+                    $scope.customerFilter.search.before();
+                    // todo: refresh grid
+                },
+                before: function(){
+                    $scope.customerFilter.search.gridId = 'customerGrid';
+                }
+            },
+            customerGrid: {
+                multiSelect: true,
+                idsOut: null,
+                fieldName: null,
+                valuesOut: null,
+                getSelectedIds: function () {
+                    
+                },
+                getSelectedValues: function () {
+
+                }
+            }
         };
     }]);
 

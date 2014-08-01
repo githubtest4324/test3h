@@ -1,87 +1,94 @@
-
-<!--requestMainFilter page-->
-<div ng-controller="requestMainFilterController" class="panel panel-default">
-    <!--criteria form-->
+<!--requestMainFilterController controller-->
+<div ng-controller="requestMainFilterController">
+    <!--requestMainFilter page-->
     <div class="panel panel-default">
-        <div class="panel-heading">Filter</div>
-        <div class="panel-body">
-            <form class="form-horizontal" role="form" novalidate>
-                <!--Customer field-->
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Customer</label>
-                    <div class="col-sm-10">
-                        <input ng-model="customer.names" type="text" class="form-controll">
-                        <!--openCustomerFilter action-->
-                        <div class="btn-group">
-                            <button ng-click="requestMainFilter.criteria.customer.openCustomerFilter.perform()" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            <button ng-click="valx.x()" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+        <!--criteria form-->
+        <div class="panel panel-default">
+            <div class="panel-heading">Filter</div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" novalidate>
+                    <!--Customer field-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Customer</label>
+
+                        <div class="col-sm-10">
+                            <input ng-model="customer.names" type="text" class="form-controll">
+                            <!--openCustomerFilter action-->
+                            <div class="btn-group">
+                                <button ng-click="requestMainFilter.criteria.customer.openCustomerFilter.perform()"
+                                        type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                <button ng-click="valx.x()" type="button" class="btn btn-default"><i
+                                        class="fa fa-search"></i></button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--Code field-->
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Code</label>
-                    <div class="col-sm-10">
-                        <input ng-model="criteria.code" type="text" class="form-controll">
-                    </div>
-                </div>
-                <!--Creation date field-->
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Creation date</label>
-                    <div class="col-sm-2">
-                        <input type="date" ng-model="creationDateStart" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="date" ng-model="creationDateEnd" class="form-control"/>
-                    </div>
-                </div>
-            </form>
-        </div>
-        A: '{{customerFilter.multiSelect}}'
-    </div>
-</div>
-
-<!--customerFilter form-->
-<div class="modal fade" id="customerFilter" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form name="form" role="form" novalidate
-                  class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
-                  ng-submit="create()">
-
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                            ng-click="clear()">&times;</button>
-                    <h4 class="modal-title" id="myOrderLabel">Create or edit a Order</h4>
-                </div>
-                <div class="modal-body">
+                    <!--Code field-->
                     <div class="form-group">
-                        <label>Sample text attribute</label>
-                        <input type="text" class="form-control" name="test">
-                    </div>
+                        <label class="col-sm-2 control-label">Code</label>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-                    </button>
-                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-save"></span> Save
-                    </button>
-                </div>
-            </form>
+                        <div class="col-sm-10">
+                            <input ng-model="criteria.code" type="text" class="form-controll">
+                        </div>
+                    </div>
+                    <!--Creation date field-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Creation date</label>
+
+                        <div class="col-sm-2">
+                            <input type="date" ng-model="creationDateStart" class="form-control"/>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="date" ng-model="creationDateEnd" class="form-control"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            A: '{{customerFilter.multiSelect}}'
+        </div>
+    </div>
+
+    <!--customerFilter form-->
+    <div class="modal fade" id="customerFilter" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="form" role="form" novalidate
+                      class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+                      ng-submit="create()">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" id="myOrderLabel">Create or edit a Order</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Sample text attribute</label>
+                            <input type="text" class="form-control" name="test">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                        </button>
+                        <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span> Save
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
 
 
 <div class="btn-toolbar" role="toolbar">
-	<div class="btn-group">
-		<button type="button" class="btn btn-default" tooltip="Search" ><i class="fa fa-search"></i></button>
-		<button type="button" class="btn btn-default" tooltip="Open"><i class="fa fa-edit"></i></button>
-		<button type="button" class="btn btn-default" tooltip="Add"><i class="fa fa-plus"></i></button>
-		<button type="button" class="btn btn-default" tooltip="Remove"><i class="fa fa-minus" style="color:#5660ff;"></i></button>
-	</div>
+    <div class="btn-group">
+        <button type="button" class="btn btn-default" tooltip="Search"><i class="fa fa-search"></i></button>
+        <button type="button" class="btn btn-default" tooltip="Open"><i class="fa fa-edit"></i></button>
+        <button type="button" class="btn btn-default" tooltip="Add"><i class="fa fa-plus"></i></button>
+        <button type="button" class="btn btn-default" tooltip="Remove"><i class="fa fa-minus"
+                                                                          style="color:#5660ff;"></i></button>
+    </div>
 </div>

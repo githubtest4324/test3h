@@ -6,7 +6,7 @@ test3hipsterApp
             $routeProvider
                 .when('/requestMainFilter', {
                     templateUrl: 'views/requestMainFilter.html',
-                    controller: 'RequestMainFilterController',
+                    controller: 'requestMainFilterController',
                     resolve:{
 //                        resolvedOrder: ['RequestMainFilter', function (RequestMainFilter) {
 //                            return RequestMainFilter.query();

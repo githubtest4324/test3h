@@ -1,26 +1,30 @@
 
-<!--requestMainFilter-->
+<!--requestMainFilter page-->
 <div ng-controller="requestMainFilterController" class="panel panel-default">
-    <!--criteria-->
+    <!--criteria form-->
     <div class="panel panel-default">
         <div class="panel-heading">Filter</div>
         <div class="panel-body">
             <form class="form-horizontal" role="form" novalidate>
-                <!--Customers-->
+                <!--Customer field-->
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Customer</label>
                     <div class="col-sm-10">
-                        <input ng-model="customers" type="text" class="form-controll">
+                        <input ng-model="customer.names" type="text" class="form-controll">
+                        <!--openCustomerFilter action-->
+                        <div class="btn-group">
+                            <button ng-click="criteria.customer.openCustomerFilter.perform()" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
                     </div>
                 </div>
-                <!--Code-->
+                <!--Code field-->
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Code</label>
                     <div class="col-sm-10">
                         <input ng-model="criteria.code" type="text" class="form-controll">
                     </div>
                 </div>
-                <!--Creation date-->
+                <!--Creation date field-->
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Creation date</label>
                     <div class="col-sm-2">
@@ -36,6 +40,39 @@
     </div>
 </div>
 
+<!--customerFilter form-->
+<div class="modal fade" id="customerFilter" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="form" role="form" novalidate
+                  class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+                  ng-submit="create()">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                            ng-click="clear()">&times;</button>
+                    <h4 class="modal-title" id="myOrderLabel">Create or edit a Order</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Sample text attribute</label>
+                        <input type="text" class="form-control" name="test">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                    </button>
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-save"></span> Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 

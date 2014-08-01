@@ -17,7 +17,7 @@ var view = {
         'criteria': {
             type: form,
             'creationDate': 'filterDateRange',
-            'code': string,
+            'code': str,
             'customers': {
                 type: filterEntity,
                 readOnly: true,
@@ -53,10 +53,10 @@ var view = {
         'requestGrid':{
             type: grid,
             'id': id,
-            'code': string,
+            'code': str,
             'creationDate': date,
             'expectedDeliveryDate': date,
-            'customer': string
+            'customer': str
         }
 
     },
@@ -70,13 +70,13 @@ var view = {
             }
         },
         output: {
-            'ids': string,
-            'names': string
+            'ids': str,
+            'names': str
         },
         // Criteria
         'criteria': {
             type: form,
-            'name': string
+            'name': str
         },
         // Search Action
         'search': {
@@ -88,7 +88,7 @@ var view = {
         // Grid
         'customerGrid': {
             type: grid,
-            'name': string
+            'name': str
         },
         // Ok/Cancel Actions
         'ok': {
@@ -108,7 +108,7 @@ var view = {
     },
     'testModule': {
         type: form,
-        't1': string,
+        't1': str,
         'criteria': {
             type: form,
             'creationDate': filterDateRange

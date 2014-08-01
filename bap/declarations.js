@@ -21,45 +21,45 @@ var filterEntityDisplay = {displayType: 'filterEntityDisplay'};
 var filterDateRangeDisplay = {displayType: 'filterDateRangeDisplay'};
 
 // variables
-var id = {variableType: 'string', display: noDisplay};
-var string = {variableType: 'string', display: textInput};
-var date = {variableType: 'date', display: datePicker};
-var bool = {variableType: 'boolean', display: checkBox};
-var number = {variableType: 'number', display: textInput};
-var object = {variableType: 'object'};
+var id = {variableType: 'stringType', display: noDisplay};
+var str = {variableType: 'stringType', display: textInput};
+var date = {variableType: 'dateType', display: datePicker};
+var bool = {variableType: 'booleanType', display: checkBox};
+var number = {variableType: 'numberType', display: textInput};
+var obj = {variableType: 'objectType'};
 var filterEntity = {
-    variableType: 'object',
+    variableType: 'objectType',
     display: 'filterEntityDisplay',
-    'ids': string,
-    'names': string
+    'ids': str,
+    'names': str
 };
 var filterDateRange = {
-    variableType: 'object',
+    variableType: 'obj',
     display: 'filterDateRangeDisplay',
     'startDate': date,
     'endDate': date
 };
 
 // views
-var page = {viewType: 'page'};
-var form = {viewType: 'form'};
+var page = {viewType: 'pageView'};
+var form = {viewType: 'formView'};
 var grid = {
-    viewType: 'grid',
+    viewType: 'gridView',
     input: {
         'multiSelect': {type: bool, defaultValue: true}
     },
     methods: {
         getSelectedIds: {
             output: {
-                'ids': string
+                'ids': str
             }
         },
         getSelectedValues: {
             input: {
-                'fieldName': string
+                'fieldName': str
             },
             output: {
-                'ids': string
+                'ids': str
             }
         }
     }
@@ -67,20 +67,20 @@ var grid = {
 
 // actions
 var openModal = {
-    actionType: 'openModal',
+    actionType: 'openModalAction',
     input: {
-        'viewId': {type: string, mandatory: true},
-        'viewParameters': object
+        'viewId': {type: str, mandatory: true},
+        'viewParameters': obj
     }
 };
 var refreshGrid = {
-    actionType: 'refreshGrid',
+    actionType: 'refreshGridAction',
     input: {
-        'gridId': {type: string, mandatory: true}
+        'gridId': {type: str, mandatory: true}
     }
 };
 var back = {
-    actionType: 'back'
+    actionType: 'backAction'
 };
 var customAction = {
     actionType: 'customAction'

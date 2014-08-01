@@ -7,7 +7,7 @@ var model = {
 			},
 			tariffs: 'Tariff[]',
 			customer: 'Customer',
-			code: 'string'
+			code: 'str'
 		},
 		Tariff: {
 			id: 'id',

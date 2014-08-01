@@ -19,6 +19,7 @@ test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMai
                         },
                         before: function () {
                             $scope.requestMainFilter.criteria.customer.openCustomerFilter.viewId = 'customerFilter';
+                            $scope.customerFilter.multiSelect = false;
                         },
                         after: function () {
 

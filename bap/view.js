@@ -26,9 +26,7 @@ var view = {
                     before: {
                         bind: {
                             '$viewId': 'customerFilter',
-                            '$viewParameters': {
-                                '$multiSelect': false
-                            }
+                            '$customerFilter.multiSelect': false
                         }
                     },
                     after: {

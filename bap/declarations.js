@@ -10,37 +10,39 @@ var y1 = {
     x4: 'ccc'
 };
 
-// display
-var noDisplay = {displayType: 'noDisplay'};
-var label = {displayType: 'label'};
-var textInput = {displayType: 'textInput'};
-var checkBox = {displayType: 'checkBox'};
-var datePicker = {displayType: 'datePicker'};
-var textArea = {displayType: 'textArea'};
-var filterEntityDisplay = {displayType: 'filterEntityDisplay'};
-var filterDateRangeDisplay = {displayType: 'filterDateRangeDisplay'};
+// Field types
+var any = {fieldType: 'anyType'}; // Defalut type
+var id = {fieldType: 'idType'};
+var str = {fieldType: 'stringType'};
+var date = {fieldType: 'dateType'}; // Contains both date and time
+var bool = {fieldType: 'booleanType'};
+var number = {fieldType: 'numberType'};
 
-// variables
-var id = {variableType: 'stringType', display: noDisplay};
-var str = {variableType: 'stringType', display: textInput};
-var date = {variableType: 'dateType', display: datePicker};
-var bool = {variableType: 'booleanType', display: checkBox};
-var number = {variableType: 'numberType', display: textInput};
-var obj = {variableType: 'objectType'};
+
+// Simple views
+var label = {type: str, displayType: 'label'};
+var text = {type: str, displayType: 'text'};
+var textArea = {type: str, displayType: 'textArea'};
+var checkBox = {type: bool, displayType: 'checkBox'};
+var datePicker = {type: date, displayType: 'datePicker'};
+var timePicker = {type: date, displayType: 'timePicker'};
+var dateTimePicker = {type: date, displayType: 'dateTimePicker'};
+
+// Filter views
 var filterEntity = {
-    variableType: 'objectType',
     display: 'filterEntityDisplay',
     'ids': str,
     'names': str
 };
 var filterDateRange = {
-    variableType: 'obj',
-    display: 'filterDateRangeDisplay',
-    'startDate': date,
-    'endDate': date
+    'startDate': {
+        type: datePicker
+    },
+    'endDate': datePicker
 };
 
-// views
+
+// Container views
 var page = {viewType: 'pageView'};
 var form = {viewType: 'formView'};
 var grid = {
@@ -65,13 +67,12 @@ var grid = {
     }
 };
 
-// actions
+// Actions
 var openModal = {
     actionType: 'openModalAction',
-    input: {
-        'viewId': {type: str, mandatory: true},
-        'viewParameters': obj
-    }
+    'viewId': {type: str, mandatory: true},
+    'viewParameters': any,
+	'viewOutput': any
 };
 var refreshGrid = {
     actionType: 'refreshGridAction',

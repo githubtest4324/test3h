@@ -17,24 +17,24 @@ var view = {
         'criteria': {
             type: form,
             'creationDate': 'filterDateRange',
-            'code': str,
-            'customers': {
+            'code': text,
+            'customer': {
                 type: filterEntity,
                 readOnly: true,
                 'openCustomerFilter': {
                     type: openModal,
                     before: {
                         bind: {
-                            'input.viewId': 'customerFilter',
-                            'input.viewParameters': {
-                                'multiSelect': false
+                            '$viewId': 'customerFilter',
+                            '$viewParameters': {
+                                '$multiSelect': false
                             }
                         }
                     },
                     after: {
                         bind: {
-                            'output.customers.ids': 'ids',
-                            'output.customers.names': 'names'
+                            '$customers.ids': 'ids',
+                            '$customers.names': 'names'
                         }
                     }
                 }
@@ -62,17 +62,15 @@ var view = {
     },
     'customerFilter': {
         type: form,
-        input: {
-            'multiSelect': {
-                type: bool,
-                defaultValue: false,
-                bind: 'customerGrid.multiSelect'
-            }
+        // Input parameters
+        'multiSelect': {
+            type: bool,
+            defaultValue: false,
+            bind: 'customerGrid.multiSelect'
         },
-        output: {
-            'ids': str,
-            'names': str
-        },
+        // Output parameters
+        'idsOut': str,
+        'namesOut': str,
         // Criteria
         'criteria': {
             type: form,

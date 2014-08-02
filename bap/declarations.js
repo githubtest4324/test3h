@@ -88,13 +88,13 @@ var grid = {
 //Actions
 var openModal = {
 		actionType: 'openModalAction',
-		'viewId': {type: form, mandatory: true},
+		'view': {type: form, mandatory: true},
 		'viewParameters': any,
 		'viewOutput': any
 };
 var refreshGrid = {
 		actionType: 'refreshGridAction',
-		'gridId': {type: str, mandatory: true}
+		'gridView': {type: form, mandatory: true}
 };
 var back = {
 		actionType: 'backAction'

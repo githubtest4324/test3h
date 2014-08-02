@@ -25,8 +25,8 @@ var view = {
                     type: openModal,
                     before: {
                         bind: {
-                            '$viewId': '$customerFilter',
-                            '$customerFilter.grid.multiSelect': false
+                            '$view': '$customerFilter',
+                            '$customerFilter.grid.options.multiSelect': false
                         }
                     },
                     after: {
@@ -43,7 +43,7 @@ var view = {
             type: refreshGrid,
             before: {
                 bind: {
-                    'gridId': 'requestGrid'
+                    '$gridView': '$requestGrid'
                 }
             }
         },
@@ -72,22 +72,23 @@ var view = {
         'search': {
             type: refreshGrid,
             before: {
-                bind: {gridId: 'customerGrid'}
+                bind: {'$gridView': '$grid'}
             }
         },
         // Grid
         'grid': {
             type: grid,
-            'name': str
+            'name': str,
+            'code': str
         },
         // Ok/Cancel Actions
         'ok': {
             type: customAction,
             before: {
                 bind: {
-                    '$idsOut': '$customerGrid.selectedIds()',
+                    '$idsOut': 'grid.selectedIds()',
                     '$customerGrid.selectedValues.fieldName': 'name',
-                    '$namesOut': '$customerGrid.selectedValues()'
+                    '$namesOut': '$grid.selectedValues()'
                 },
                 after: {
                     'goBack': back

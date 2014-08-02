@@ -3,7 +3,7 @@
 /* App Module */
 
 var test3hipsterApp = angular.module('test3hipsterApp', ['http-auth-interceptor', 'tmh.dynamicLocale',
-    'ngResource', 'ngRoute', 'ngCookies', 'test3hipsterAppUtils', 'pascalprecht.translate', 'truncate']);
+    'ngResource', 'ngRoute', 'ngCookies', 'ngGrid', 'test3hipsterAppUtils', 'pascalprecht.translate', 'truncate']);
 
 test3hipsterApp
     .config(['$routeProvider', '$httpProvider', '$translateProvider',  'tmhDynamicLocaleProvider', 'USER_ROLES',

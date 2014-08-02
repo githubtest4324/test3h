@@ -26,7 +26,7 @@ var view = {
                     before: {
                         bind: {
                             '$viewId': '$customerFilter',
-                            '$customerFilter.multiSelect': false
+                            '$customerFilter.grid.multiSelect': false
                         }
                     },
                     after: {
@@ -60,12 +60,6 @@ var view = {
     },
     'customerFilter': {
         type: form,
-        // Input parameters
-        'multiSelect': {
-            type: bool,
-            defaultValue: false,
-            bind: 'customerGrid.multiSelect'
-        },
         // Output parameters
         'idsOut': str,
         'namesOut': str,
@@ -82,7 +76,7 @@ var view = {
             }
         },
         // Grid
-        'customerGrid': {
+        'grid': {
             type: grid,
             'name': str
         },

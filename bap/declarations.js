@@ -49,8 +49,25 @@ var form = {viewType: 'formView'};
 var grid = {
 		viewType: 'gridView',
 		
-		// Grid vizual parameters
-		'multiSelect': {type: bool, defaultValue: true},
+		// Grid options
+		options: {
+			multiSelect: {type: bool, defaultValue: true},
+            enablePaging: {type: bool, defaultValue: false},
+            showFooter: {type: bool, defaultValue: false},
+            enableColumnResize: {type: bool, defaultValue: true},
+            enableColumnReordering: {type: bool, defaultValue: true},
+            enableRowReordering: {type: bool, defaultValue: true},
+            enableRowSelection: {type: bool, defaultValue: true},
+            enableSorting: {type: bool, defaultValue: true},
+            footerRowHeight: {type: num, defaultValue: 30},
+            headerRowHeight: {type: num, defaultValue: 35},
+            rowHeight: {type: num, defaultValue: 35},
+            keepLastSelected: {type: bool, defaultValue: false},
+            multiSelect: {type: bool, defaultValue: true},
+            selectWithCheckboxOnly: {type: bool, defaultValue: true},
+            showSelectionCheckbox: {type: bool, defaultValue: true}
+
+		},
 
 		// idsOut getSelectedIds() - Returns comma separated list of selected ids
 		selectedIds: {

@@ -43,7 +43,8 @@ test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMai
             idsOut: null,
             namesOut: null,
             criteria: {
-                name: null
+                name: null,
+                code: null
             },
             search: {
                 gridId: null,
@@ -74,10 +75,10 @@ test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMai
                     data: 'customerFilter.customerGrid.data'
                 },
                 data: [
-                    {name: 'Customer1'},
-                    {name: 'Customer2'},
-                    {name: 'Customer3'},
-                    {name: 'Customer4'}
+                    {name: 'Customer1', code: 'code1'},
+                    {name: 'Customer2', code: 'code2'},
+                    {name: 'Customer3', code: 'code3'},
+                    {name: 'Customer4', code: 'code4'}
                 ],
                 idsOut: null,
                 fieldName: null,

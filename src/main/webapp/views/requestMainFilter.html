@@ -17,8 +17,6 @@
                             <div class="btn-group">
                                 <button ng-click="requestMainFilter.criteria.customer.openCustomerFilter.perform()"
                                         type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                <button ng-click="valx.x()" type="button" class="btn btn-default"><i
-                                        class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </div>
@@ -61,14 +59,27 @@
                         <h4 class="modal-title" id="myOrderLabel">Search customer</h4>
                     </div>
                     <div class="modal-body">
+                        <!--criteria-->
                         <div class="form-group">
-                            <label>Sample text attribute</label>
-                            <input type="text" class="form-control" name="test">
+                            <label class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input ng-model="customerFilter.criteria.name" type="text" class="form-controll">
+                            </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Code</label>
+                            <div class="col-sm-10">
+                                <input ng-model="customerFilter.criteria.code" type="text" class="form-controll">
+                            </div>
+                        </div>
+                        <!--search-->
                         <button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        <div class="gridStyle" ng-grid="customerFilter.customerGrid.options"></div>
+                        <!--grid-->
+                        <div style="height: 300px;" ng-grid="customerFilter.customerGrid.options"></div>
                         <div class="btn-group">
+                            <!--ok-->
                             <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i></button>
+                            <!--cancel-->
                             <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-ban-circle"></i></button>
                         </div>
                     </div>

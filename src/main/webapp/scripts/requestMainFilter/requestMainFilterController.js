@@ -53,11 +53,18 @@ test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMai
                 idsOut: null,
                 fieldName: null,
                 valuesOut: null,
-                getSelectedIds: function () {
-                    
+                selectedIds: {
+                    idsOut: null,
+                    perform: function(){
+                        // todo: get selected ids
+                    }
                 },
-                getSelectedValues: function () {
-
+                selectedValues: {
+                    fieldName: null,
+                    valuesOut: null,
+                    perform: function(){
+                        // todo: get selected values
+                    }
                 }
             }
         };

@@ -48,22 +48,30 @@ var page = {viewType: 'pageView'};
 var form = {viewType: 'formView'};
 var grid = {
 		viewType: 'gridView',
+		
+		// Grid vizual parameters
 		'multiSelect': {type: bool, defaultValue: true},
-		getSelectedIds: {
+
+		// idsOut getSelectedIds() - Returns comma separated list of selected ids
+		selectedIds: {
 			type: func,
+			functionType: 'gridSelectedIds',
 			'idsOut': str
 		},
-		getSelectedValues: {
+		
+		// valuesOut getSelectedValues(fieldName) - Returns comma separated list of selected values for 'fieldName'
+		selectedValues: {
 			type: func,
+			functionType: 'gridSelectedValues',
 			'fieldName': str,
-			'valuesOut': str
+			'valuesOut': str,
 		}
 };
 
 //Actions
 var openModal = {
 		actionType: 'openModalAction',
-		'viewId': {type: str, mandatory: true},
+		'viewId': {type: form, mandatory: true},
 		'viewParameters': any,
 		'viewOutput': any
 };

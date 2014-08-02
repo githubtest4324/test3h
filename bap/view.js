@@ -25,14 +25,14 @@ var view = {
                     type: openModal,
                     before: {
                         bind: {
-                            '$viewId': 'customerFilter',
+                            '$viewId': '$customerFilter',
                             '$customerFilter.multiSelect': false
                         }
                     },
                     after: {
                         bind: {
-                            '$customers.ids': 'ids',
-                            '$customers.names': 'names'
+                            '$customer.ids': '$customerFilter.idsOut',
+                            '$customer.names': '$customerFilter.namesOut'
                         }
                     }
                 }
@@ -91,8 +91,9 @@ var view = {
             type: customAction,
             before: {
                 bind: {
-                    'output.ids': 'customerGrid.getSelectedIds()',
-                    'output.names': 'customerGrid.getSelectedValues("name")'
+                    '$idsOut': '$customerGrid.selectedIds()',
+                    '$customerGrid.selectedValues.fieldName': 'name',
+                    '$namesOut': '$customerGrid.selectedValues()'
                 },
                 after: {
                     'goBack': back

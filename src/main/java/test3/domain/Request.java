@@ -49,7 +49,18 @@ public class Request implements Serializable {
     @ManyToOne(targetEntity=Customer.class)
     private Customer customer;
 
-    private String code;
+    @ManyToOne
+    private Address deliveryAddress;
+    
+    public Address getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public void setDeliveryAddress(Address deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+	}
+
+	private String code;
     
     public long getId() {
         return id;

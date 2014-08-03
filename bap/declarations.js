@@ -51,22 +51,13 @@ var grid = {
 		
 		// Grid options
 		options: {
-			multiSelect: {type: bool, defaultValue: true},
-            enablePaging: {type: bool, defaultValue: false},
-            showFooter: {type: bool, defaultValue: false},
-            enableColumnResize: {type: bool, defaultValue: true},
-            enableColumnReordering: {type: bool, defaultValue: true},
-            enableRowReordering: {type: bool, defaultValue: true},
-            enableRowSelection: {type: bool, defaultValue: true},
-            enableSorting: {type: bool, defaultValue: true},
-            footerRowHeight: {type: num, defaultValue: 30},
+			selectable: {type: bool, defaultValue: true},
+			multiSelection: {type: bool, defaultValue: true},
+            columnResize: {type: bool, defaultValue: true},
+            columnReorder: {type: bool, defaultValue: true},
+            sortable: {type: bool, defaultValue: true},
             headerRowHeight: {type: num, defaultValue: 35},
             rowHeight: {type: num, defaultValue: 35},
-            keepLastSelected: {type: bool, defaultValue: false},
-            multiSelect: {type: bool, defaultValue: true},
-            selectWithCheckboxOnly: {type: bool, defaultValue: true},
-            showSelectionCheckbox: {type: bool, defaultValue: true}
-
 		},
 
 		// idsOut getSelectedIds() - Returns comma separated list of selected ids

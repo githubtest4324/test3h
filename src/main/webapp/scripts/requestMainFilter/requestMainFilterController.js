@@ -56,29 +56,37 @@ test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMai
                     $scope.customerFilter.search.gridId = 'customerGrid';
                 }
             },
-            customerGrid: {
+            grid: {
                 options: {
-                    multiSelect: true,
+                    selectable: false,
+                    multiSelection: false,
+                    columnResize: true,
+                    columnReorder: true,
+                    sortable: false,
+                    headerRowHeight: 35,
+                    rowHeight: 35
+                },
+                ngGridOptions: {
+                    multiSelect: null,
+                    enableRowSelection: null,
+                    selectWithCheckboxOnly: null,
+                    showSelectionCheckbox: null,
+                    enableColumnResize: null,
+                    enableColumnReordering: false,
+                    enableSorting: null,
+                    footerRowHeight: null,
+                    headerRowHeight: null,
+                    rowHeight: null,
+                    keepLastSelected: false,
                     enablePaging: false,
                     showFooter: false,
-                    enableColumnResize: true,
-                    enableColumnReordering: true,
-                    enableRowReordering: true,
-                    enableRowSelection: true,
-                    enableSorting: true,
-                    footerRowHeight: 30,
-                    headerRowHeight: 35,
-                    rowHeight: 35,
-                    keepLastSelected: false,
-                    selectWithCheckboxOnly: true,
-                    showSelectionCheckbox: true,
-                    data: 'customerFilter.customerGrid.data'
+                    data: 'customerFilter.grid.data'
                 },
                 data: [
                     {name: 'Customer1', code: 'code1'},
                     {name: 'Customer2', code: 'code2'},
                     {name: 'Customer3', code: 'code3'},
-                    {name: 'Customer4', code: 'code4'}
+                    {name: 'Customer4a', code: 'code4'}
                 ],
                 idsOut: null,
                 fieldName: null,
@@ -98,5 +106,39 @@ test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMai
                 }
             }
         };
+
+        // requestMainFilter->customerFilter->grid
+        $scope.initGrid_3423 = function(){
+
+            // Multiselection
+            $scope.customerFilter.grid.ngGridOptions.multiSelect = $scope.customerFilter.grid.options.multiSelection;
+            $scope.customerFilter.grid.ngGridOptions.selectWithCheckboxOnly = $scope.customerFilter.grid.options.multiSelection;
+            $scope.customerFilter.grid.ngGridOptions.showSelectionCheckbox = $scope.customerFilter.grid.options.multiSelection;
+
+            // Selectable
+            $scope.customerFilter.grid.ngGridOptions.enableRowSelection = $scope.customerFilter.grid.options.selectable;
+
+            // Column resize
+            $scope.customerFilter.grid.ngGridOptions.enableColumnResize = $scope.customerFilter.grid.options.columnResize;
+
+            // Column reorder
+            $scope.customerFilter.grid.ngGridOptions.enableColumnReordering = $scope.customerFilter.grid.options.columnReorder;
+
+            // Sortable
+            $scope.customerFilter.grid.ngGridOptions.enableSorting = $scope.customerFilter.grid.options.sortable;
+
+            // Header row height
+            $scope.customerFilter.grid.ngGridOptions.headerRowHeight = $scope.customerFilter.grid.options.headerRowHeight;
+
+            // Row height
+            $scope.customerFilter.grid.ngGridOptions.rowHeight = $scope.customerFilter.grid.options.rowHeight;
+
+
+
+
+
+
+        };
+        $scope.initGrid_3423();
     }]);
 

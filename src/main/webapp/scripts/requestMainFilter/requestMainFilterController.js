@@ -82,6 +82,7 @@ test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMai
                     showFooter: false,
                     data: 'customerFilter.grid.data'
                 },
+                selectedItems: [],
                 data: [
                     {name: 'Customer1', code: 'code1'},
                     {name: 'Customer2', code: 'code2'},

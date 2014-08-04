@@ -102,6 +102,9 @@ var refreshGrid = {
 var closeModal = {
     type : 'closeModal'
 };
+var callWs = {
+    type : 'callWs'
+};
 
 
 //////////////////////////////////

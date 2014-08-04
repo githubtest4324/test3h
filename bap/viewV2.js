@@ -22,34 +22,29 @@ include('modelV2.js');
 var requestsByCriteriaWs = {
     $type: webService,
     $url: 'res/requests/byCriteria',
-    $inputModel: {
+    $input: {
         name: str,
         code: str,
         deliveryAddressCity: str,
-        selectedRecords: {
+        customers: {
             $type: list,
             $itemType: Customer
         },
         startDate: date,
         endDate: date
     },
-    $outputModel: {
-        requests: {
-            $type: list,
-            $itemType: Request
-        }
-    }
+    $output: Request
 };
 
 var customersByCriteriaWs = {
     $type: webService,
     $url: 'res/customers/byCriteria',
-    $inputModel: {
+    $input: {
         code: str,
         name: str,
         city: str
     },
-    $outputModel: {
+    $output: {
         customers: {
             $type: list,
             $itemType: Customer
@@ -58,9 +53,18 @@ var customersByCriteriaWs = {
 };
 
 
+var saveRequestWs = {
+    $type: webService,
+    $url: 'res/requests.save',
+    $input: Request,
+    $output: {
+        saveOk: bool
+    }
+};
+
 var customerSearchModel = {
-    criteria: customersByCriteriaWs.$inputModel,
-    grid: customersByCriteriaWs.$outputModel,
+    criteria: customersByCriteriaWs.$input,
+    grid: customersByCriteriaWs.$output,
     meta: {
         selectedRecords: {
             $type: list,
@@ -87,6 +91,7 @@ var createCustomerSearchForm = function (formName, modelName, targetSelectedCust
         customerGrid: {
             $type: grid,
             $model: modelName,
+            $multiSelect: true,
             $selectedRecordModel: modelName + 'meta.selectedRecords',
             $dataSource: {
                 $source: customersByCriteriaWs,
@@ -114,7 +119,7 @@ var createCustomerSearchForm = function (formName, modelName, targetSelectedCust
             ]
         }
     };
-}
+};
 
 
 var reqMainPage = {
@@ -122,21 +127,20 @@ var reqMainPage = {
     $location: 'requests', // Disk location
     $url: 'requests/mainPage', // Angular routing location
     $model: {
-        criteriaModel: {
-            criteria: requestsByCriteriaWs.$inputModel,
-            meta: {
-                customerNames: str
-            }
-        },
-        gridModel: requestsByCriteriaWs.$outputModel,
-        customerSearch: customerSearchModel
+        criteriaModel: requestsByCriteriaWs.$input,
+        gridModel: requestsByCriteriaWs.$output,
+        customerSearch: customerSearchModel,
+        selectedCustomer: Customer,
+        saveStatus: {
+            saveOk: bool
+        }
     },
     criteria: {
         $type: form,
         $model: 'criteriaModel',
         $fields: {
             $list: [
-                'criteria.name', 'criteria.code', 'criteria.deliveryAddressCity', 'criteria.startDate', 'criteria.endDate', 'meta.customerNames'
+                'name', 'code', 'deliveryAddressCity', 'startDate', 'endDate', 'customers'
             ]
         }
     },
@@ -148,6 +152,8 @@ var reqMainPage = {
     reqGrid: {
         $display: grid,
         $model: 'gridModel',
+        $selectedRecordModel: 'selectedCustomer',
+        $multiSelect: false,
         $dataSource: {
             $source: requestsByCriteriaWs,
             $input: 'criteriaModel.criteria',
@@ -160,10 +166,25 @@ var reqMainPage = {
             ]
         }
     },
-    customerSearch: createCustomerSearchForm('customerSearchModel', 'customerSearch', 'criteriaModel.criteria.selectedRecords')
+    customerSearch: createCustomerSearchForm('customerSearchModel', 'customerSearch', 'criteriaModel.customers'),
+    customerDetails: {
+        $type: form,
+        $model: 'selectedCustomer',
+        save: {
+            $type: action,
+            $action: callWs,
+            $ws: saveRequestWs,
+            $input: 'selectedCustomer',
+            $output: 'saveStatus'
+
+        },
+        fields: [
+            'name', 'code', 'address.asString'
+        ]
+    }
 };
 
+
 writeFile('output.json', JSON.stringify(reqMainPage, null, 4));
-//console.log(JSON.stringify(reqMainPage, null, 2));
 //console.log(JSON.stringify(Country, null, 2));
 //console.log(x('liviu'));

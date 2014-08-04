@@ -73,7 +73,7 @@ var customerSearchModel = {
     }
 };
 
-var createCustomerSearchForm = function (formName, modelName, targetSelectedCustomersModelName) {
+var createCustomerSearchForm = function (modelName, formName, targetSelectedCustomersModelName) {
     return {
         $type: modal,
         criteria: {
@@ -86,17 +86,17 @@ var createCustomerSearchForm = function (formName, modelName, targetSelectedCust
         refresh: {
             $type: action,
             $action: refreshGrid,
-            $target: formName + 'customerGrid'
+            $target: formName + '.customerGrid'
         },
         customerGrid: {
             $type: grid,
             $model: modelName,
             $multiSelect: true,
-            $selectedRecordModel: modelName + 'meta.selectedRecords',
+            $selectedRecordModel: modelName + '.meta.selectedRecords',
             $dataSource: {
                 $source: customersByCriteriaWs,
-                $input: modelName + 'criteria',
-                $output: modelName + 'grid'
+                $input: modelName + '.criteria',
+                $output: modelName + '.grid'
             },
             $fields: [
                 'grid.customers.name', 'grid.customers.code', 'grid.customers.address.asString',
@@ -113,7 +113,7 @@ var createCustomerSearchForm = function (formName, modelName, targetSelectedCust
             $bind: [
                 {
                     $type: binding,
-                    $source: modelName + 'meta.selectedRecords',
+                    $source: modelName + '.meta.selectedRecords',
                     $target: targetSelectedCustomersModelName
                 }
             ]
@@ -129,7 +129,7 @@ var reqMainPage = {
     $model: {
         criteriaModel: requestsByCriteriaWs.$input,
         gridModel: requestsByCriteriaWs.$output,
-        customerSearch: customerSearchModel,
+        customerSearchModel: customerSearchModel,
         selectedCustomer: Customer,
         saveStatus: {
             saveOk: bool
@@ -142,6 +142,11 @@ var reqMainPage = {
             $list: [
                 'name', 'code', 'deliveryAddressCity', 'startDate', 'endDate', 'customers'
             ]
+        },
+        open: {
+            $type: action,
+            $action: openModal,
+            $target: 'customerSearch'
         }
     },
     refresh: {

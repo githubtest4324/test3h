@@ -1,6 +1,9 @@
 
 
 var Country = {
+    $type: model,
+    $package: 'sendy.sampleApp',
+    $name: 'Country',
     id: num,
     name: str,
     iso2: str

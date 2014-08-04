@@ -99,6 +99,9 @@ var randomData = {
 var refreshGrid = {
     type : 'refreshGrid'
 };
+var openModal = {
+    type : 'openModal'
+};
 var closeModal = {
     type : 'closeModal'
 };
@@ -110,6 +113,9 @@ var callWs = {
 //////////////////////////////////
 // Other types ($type: ...)
 //////////////////////////////////
+var model = {
+    type : 'model'
+};
 var binding = {
     type : 'binding'
 };

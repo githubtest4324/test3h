@@ -41,9 +41,21 @@ var func = {
 
 // Form display types
 var none = {
-	type : str,
-	displayType : 'label'
-};
+		type : str,
+		displayType : 'label'
+	};
+var entity = {
+		type : str,
+		displayType : 'entity',
+		// Resolves value to be displayed. 
+		toString: {
+			type: func,
+			input: {
+				'entity': any
+			},
+			returns: str
+		}
+	};
 var label = {
 	type : str,
 	displayType : 'label'
@@ -75,9 +87,12 @@ var dateTimePicker = {
 
 // Filter views
 var filterEntity = {
+	type: str,
 	display : 'filterEntityDisplay',
 	'ids' : str,
-	'names' : str
+	'names' : {
+		type: str
+	}
 };
 var filterDateRange = {
 	'startDate' : {

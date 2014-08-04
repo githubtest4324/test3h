@@ -6,18 +6,30 @@ function include(path) {
     var code = fs.readFileSync(path, 'utf-8');
     vm.runInThisContext(code, path);
 }
+function writeFile(filename, content) {
+    fs.writeFile(filename, content, function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("The file was saved!");
+        }
+    });
 
+}
 include('declarationsV2.js');
 include('modelV2.js');
 
-var getRequestsByCriteria = {
+var requestsByCriteriaWs = {
     $type: webService,
-    $url: 'res/customers/byCriteria',
+    $url: 'res/requests/byCriteria',
     $inputModel: {
         name: str,
         code: str,
         deliveryAddressCity: str,
-        customerIds: str,
+        selectedRecords: {
+            $type: list,
+            $itemType: Customer
+        },
         startDate: date,
         endDate: date
     },
@@ -29,18 +41,95 @@ var getRequestsByCriteria = {
     }
 };
 
+var customersByCriteriaWs = {
+    $type: webService,
+    $url: 'res/customers/byCriteria',
+    $inputModel: {
+        code: str,
+        name: str,
+        city: str
+    },
+    $outputModel: {
+        customers: {
+            $type: list,
+            $itemType: Customer
+        }
+    }
+};
+
+
+var customerSearchModel = {
+    criteria: customersByCriteriaWs.$inputModel,
+    grid: customersByCriteriaWs.$outputModel,
+    meta: {
+        selectedRecords: {
+            $type: list,
+            $itemType: Customer
+        }
+    }
+};
+
+var createCustomerSearchForm = function (formName, modelName, targetSelectedCustomersModelName) {
+    return {
+        $type: modal,
+        criteria: {
+            $type: form,
+            $model: modelName,
+            $fields: [
+                'criteria.code', 'criteria.name', 'criteria.city'
+            ]
+        },
+        refresh: {
+            $type: action,
+            $action: refreshGrid,
+            $target: formName + 'customerGrid'
+        },
+        customerGrid: {
+            $type: grid,
+            $model: modelName,
+            $selectedRecordModel: modelName + 'meta.selectedRecords',
+            $dataSource: {
+                $source: customersByCriteriaWs,
+                $input: modelName + 'criteria',
+                $output: modelName + 'grid'
+            },
+            $fields: [
+                'grid.customers.name', 'grid.customers.code', 'grid.customers.address.asString',
+                {$name: 'grid.customers.name', $hidden: true}
+            ]
+        },
+        cancel: {
+            $type: action,
+            $action: closeModal
+        },
+        ok: {
+            $type: action,
+            $action: closeModal,
+            $bind: [
+                {
+                    $type: binding,
+                    $source: modelName + 'meta.selectedRecords',
+                    $target: targetSelectedCustomersModelName
+                }
+            ]
+        }
+    };
+}
+
 
 var reqMainPage = {
     $type: page,
     $location: 'requests', // Disk location
+    $url: 'requests/mainPage', // Angular routing location
     $model: {
         criteriaModel: {
-            criteria: getRequestsByCriteria.$inputModel,
+            criteria: requestsByCriteriaWs.$inputModel,
             meta: {
                 customerNames: str
             }
         },
-        gridModel: getRequestsByCriteria.$outputModel
+        gridModel: requestsByCriteriaWs.$outputModel,
+        customerSearch: customerSearchModel
     },
     criteria: {
         $type: form,
@@ -49,8 +138,7 @@ var reqMainPage = {
             $list: [
                 'criteria.name', 'criteria.code', 'criteria.deliveryAddressCity', 'criteria.startDate', 'criteria.endDate', 'meta.customerNames'
             ]
-        },
-        'meta.customerNames': {$type: modelRef, $display: text}
+        }
     },
     refresh: {
         $type: action,
@@ -61,7 +149,7 @@ var reqMainPage = {
         $display: grid,
         $model: 'gridModel',
         $dataSource: {
-            $source: getRequestsByCriteria,
+            $source: requestsByCriteriaWs,
             $input: 'criteriaModel.criteria',
             $output: 'gridModel'
         },
@@ -71,10 +159,11 @@ var reqMainPage = {
                 {$name: 'requests.id', $hidden: true}
             ]
         }
-    }
+    },
+    customerSearch: createCustomerSearchForm('customerSearchModel', 'customerSearch', 'criteriaModel.criteria.selectedRecords')
 };
 
-
-console.log(JSON.stringify(reqMainPage, null, 2));
+writeFile('output.json', JSON.stringify(reqMainPage, null, 4));
+//console.log(JSON.stringify(reqMainPage, null, 2));
 //console.log(JSON.stringify(Country, null, 2));
-//console.log(reqMainPage.gridModel.requests.$itemType.xxx.toString());
+//console.log(x('liviu'));

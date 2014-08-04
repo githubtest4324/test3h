@@ -60,15 +60,18 @@ var dateTimePicker = {
     type: date,
     displayType: 'dateTimePicker'
 };
-var form = {
-    displayType: 'form'
-};
 
 //////////////////////////////////
 // Page element types ($type: ...)
 //////////////////////////////////
 var page = {
     displayType: 'page'
+};
+var form = {
+    displayType: 'form'
+};
+var modal = {
+    displayType: 'modal'
 };
 var grid = {
     displayType: 'grid'
@@ -96,8 +99,14 @@ var randomData = {
 var refreshGrid = {
     type : 'refreshGrid'
 };
+var closeModal = {
+    type : 'closeModal'
+};
 
 
 //////////////////////////////////
 // Other types ($type: ...)
 //////////////////////////////////
+var binding = {
+    type : 'binding'
+};

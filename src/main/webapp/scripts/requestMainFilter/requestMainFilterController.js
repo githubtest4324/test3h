@@ -2,6 +2,52 @@
 
 test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMainFilter',
     function ($scope, RequestMainFilter) {
+        $scope.data = {
+            customerSearchModel: {
+                grid: {
+                    customers: [
+                        {id: 'id1', address: null, name: 'Customer1', code: 'code1', asString: 'Cust1 str'},
+                        {id: 'id2', address: null, name: 'Customer2', code: 'code2', asString: 'Cust2 str'},
+                        {id: 'id3', address: null, name: 'Customer3', code: 'code3', asString: 'Cust3 str'},
+                        {id: 'id4', address: null, name: 'Customer4', code: 'code4', asString: 'Cust4 str'}
+                    ]
+                }
+            }
+        };
+        $scope.actions = {
+            openModal: function(target){
+                    $('#' + target).modal();
+            },
+            refreshGrid: function(target){
+                //todo: refresh grid's datasource
+            }
+        };
+
+        $scope.gridOptions= {
+            customerSearch: {
+                customerGrid: {
+                    multiSelect: true,
+                    enableRowSelection: true,
+                    selectWithCheckboxOnly: true,
+                    showSelectionCheckbox: true,
+                    enableColumnResize: true,
+                    enableColumnReordering: true,
+                    enableSorting: true,
+                    headerRowHeight: 35,
+                    footerRowHeight: 35,
+                    rowHeight: 35,
+                    keepLastSelected: true,
+                    enablePaging: false,
+                    showFooter: false,
+
+                    AICI AM RAMAS. sa compar valorile din test.js din proiectul vechi, sa vad de ce nu se afiseaza grid-ul
+//                    data: 'data.customerSearchModel.grid.customers'
+                    data: 'customerFilter.grid.data'
+                }
+            }
+        };
+
+
         $scope.myData = [
             {name: "Moroni", age: 50},
             {name: "Tiancum", age: 43},
@@ -9,6 +55,7 @@ test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMai
             {name: "Nephi", age: 29},
             {name: "Enos", age: 34}
         ];
+
         $scope.requestMainFilter = {
             criteria: {
                 customer: {
@@ -109,7 +156,7 @@ test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMai
         };
 
         // requestMainFilter->customerFilter->grid
-        $scope.initGrid_3423 = function(){
+        $scope.initGrid_3423 = function () {
 
             // Multiselection
             $scope.customerFilter.grid.ngGridOptions.multiSelect = $scope.customerFilter.grid.options.multiSelection;
@@ -133,10 +180,6 @@ test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMai
 
             // Row height
             $scope.customerFilter.grid.ngGridOptions.rowHeight = $scope.customerFilter.grid.options.rowHeight;
-
-
-
-
 
 
         };

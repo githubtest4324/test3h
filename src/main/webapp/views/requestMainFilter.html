@@ -1,52 +1,79 @@
 <!--requestMainFilterController controller-->
 <div ng-controller="requestMainFilterController">
-    <!--requestMainFilter page-->
+
+    <!--AA: <span ng-repeat="item in myData">{{item.name}}{{$last ? '' : ', '}}</span>-->
+    <!--<br>-->
+    <!--CCC: <pre>{{f('a.b.c')}}</pre>-->
+    <!--<br>-->
+    <!--BBB: <pre>{{myData |json}}</pre>0-->
+
+    <!--requests/mainPage page-->
     <div class="panel panel-default">
         <!--criteria form-->
-        <div class="panel panel-default">
+        <div id="criteria" class="panel panel-default">
             <div class="panel-heading">Filter</div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form" novalidate>
-                    <!--Customer field-->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Customer</label>
-
-                        <div class="col-sm-10">
-                            <input ng-model="customer.names" type="text" class="form-controll">
-                            <!--openCustomerFilter action-->
-                            <div class="btn-group">
-                                <button ng-click="requestMainFilter.criteria.customer.openCustomerFilter.perform()"
-                                        type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
                     <!--Code field-->
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Code</label>
 
                         <div class="col-sm-10">
-                            <input ng-model="criteria.code" type="text" class="form-controll">
+                            <input ng-model="data.criteriaModel.code" type="text" class="form-controll">
                         </div>
                     </div>
-                    <!--Creation date field-->
+                    <!--Name field-->
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Creation date</label>
+                        <label class="col-sm-2 control-label">Name</label>
 
-                        <div class="col-sm-2">
-                            <input type="date" ng-model="creationDateStart" class="form-control"/>
+                        <div class="col-sm-10">
+                            <input ng-model="data.criteriaModel.name" type="text" class="form-controll">
                         </div>
-                        <div class="col-sm-2">
-                            <input type="date" ng-model="creationDateEnd" class="form-control"/>
+                    </div>
+                    <!--deliveryAddressCity field-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Delivery city</label>
+
+                        <div class="col-sm-10">
+                            <input ng-model="data.criteriaModel.deliveryAddressCity" type="text" class="form-controll">
                         </div>
+                    </div>
+                    <!--startDate field-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">From</label>
+
+                        <div class="col-sm-10">
+                            <input ng-model="data.criteriaModel.startDate" type="date" class="form-controll">
+                        </div>
+                    </div>
+                    <!--endDate field-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">To</label>
+
+                        <div class="col-sm-10">
+                            <input ng-model="data.criteriaModel.endDate" type="date" class="form-controll">
+                        </div>
+                    </div>
+                    <!--customers field-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Customers</label>
+
+                        <div class="col-sm-10">
+                            <span style="border-width: 1px;" ng-repeat="item in data.criteriaModel.customers">{{item.name}}{{$last ? '' : ', '}}</span>
+                        </div>
+                    </div>
+                    <!--open action-->
+                    <div class="btn-group">
+                        <button ng-click="actions.openModal('customerSearch')"
+                                type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </div>
                 </form>
             </div>
-            A: '{{customerFilter.multiSelect}}'
         </div>
     </div>
 
-    <!--customerFilter form-->
-    <div class="modal fade" id="customerFilter" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
+    <!--customerSearch modal-->
+    <div class="modal fade" id="customerSearch" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -59,28 +86,40 @@
                         <h4 class="modal-title" id="myOrderLabel">Search customer</h4>
                     </div>
                     <div class="modal-body">
-                        <!--criteria-->
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Name</label>
-                            <div class="col-sm-10">
-                                <input ng-model="customerFilter.criteria.name" type="text" class="form-controll">
+                        <!--criteria form-->
+                        <form id="customerSearch.criteria" class="form-horizontal" role="form" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="customerSearch.criteria.name" type="text" class="form-controll">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Code</label>
-                            <div class="col-sm-10">
-                                <input ng-model="customerFilter.criteria.code" type="text" class="form-controll">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Code</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="customerSearch.criteria.code" type="text" class="form-controll">
+                                </div>
                             </div>
-                        </div>
-                        <!--search-->
-                        <button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        <!--grid-->
-                        <div style="height: 300px;" ng-grid="customerFilter.grid.ngGridOptions"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">City name</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="customerSearch.criteria.city" type="text" class="form-controll">
+                                </div>
+                            </div>
+                        </form>
+                        <!--refresh action-->
+                        <button ng-click="actions.refreshGrid('customerSearch.customerGrid')" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        <!--customerGrid grid-->
+                        <!--<div id="customerSearch.customerGrid" style="height: 300px;" ng-grid="gridOptions.customerSearch.customerGrid"></div>-->
+                        <div id="customerSearch.customerGrid" style="height: 300px;" ng-grid="gridOpt"></div>
+                        <!--<div id="customerSearch.customerGrid" style="height: 300px;" ng-grid="customerFilter.grid.ngGridOptions"></div>-->
                         <div class="btn-group">
                             <!--ok-->
-                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i></button>
+                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i>
+                            </button>
                             <!--cancel-->
-                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-ban-circle"></i></button>
+                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-ban-circle"></i>
+                            </button>
                         </div>
                     </div>
                 </form>

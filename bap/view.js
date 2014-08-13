@@ -102,7 +102,7 @@ var view = {
                         '$idsOut': 'grid.selectedIds()',
                         '$customerGrid.selectedValues.fieldName': 'name',
                         '$namesOut': '$grid.selectedValues()'
-                    },
+                    }
                 },
                 after: {
                     'goBack': back

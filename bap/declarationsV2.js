@@ -2,120 +2,74 @@
 // Field types ($type: ...)
 //////////////////////////////////
 
-var str = {
-    fieldType: 'stringType'
-};
+var str = "str";
 /**
  * Contains both date and time
  */
-var date = {
-    fieldType: 'dateType'
-};
-var bool = {
-    fieldType: 'booleanType'
-};
-var num = {
-    fieldType: 'numberType'
-};
-var func = {
-    fieldType: 'functionType'
-};
-var list = {
-    fieldType: 'listType'
-};
+var date = "date";
+var bool = "bool";
+var num = "num";
+var func = "func";
+var list = "list";
 
 
 //////////////////////////////////
-// Display options ($display: ...)
+// Field types. To be used inside $fields
 //////////////////////////////////
-var none = {
-    type: str,
-    displayType: 'label'
-};
-var label = {
-    type: str,
-    displayType: 'label'
-};
-var text = {
-    type: str,
-    displayType: 'text'
-};
-var textArea = {
-    type: str,
-    displayType: 'textArea'
-};
-var checkBox = {
-    type: bool,
-    displayType: 'checkBox'
-};
-var datePicker = {
-    type: date,
-    displayType: 'datePicker'
-};
-var timePicker = {
-    type: date,
-    displayType: 'timePicker'
-};
-var dateTimePicker = {
-    type: date,
-    displayType: 'dateTimePicker'
-};
+var none = "none";
+var label = "label";
+var text = "text";
+var textArea = "textArea";
+var checkBox = "checkBox";
+var datePicker = "datePicker";
+var timePicker = "timePicker";
+var dateTimePicker = "dateTimePicker";
+var button = "button";
 
 //////////////////////////////////
-// Page element types ($type: ...)
+// View element types. To be used inside a $view
 //////////////////////////////////
-var page = {
-    displayType: 'page'
-};
-var form = {
-    displayType: 'form'
-};
-var modal = {
-    displayType: 'modal'
-};
-var grid = {
-    displayType: 'grid'
-};
-var template = {
-    displayType: 'template'
-};
-var action = {
-    displayType: 'action'
-};
+/**
+ * It is at the top of the view chain. Has a controller and a url attached.
+ */
+var page = "page";
+/**
+ * Groups other views or fields.
+ */
+var container = "container";
+/**
+ * Groups other views or fields. Has a form like ui border.
+ */
+var form = "form";
+/**
+ * Groups other views or fields and shows them in a modal dialog. Initially it is hidden.
+ */
+var modal = "modal";
+/**
+ * %model must be of type 'list'.
+ * Data model is saved in 'items'.
+ * Selected model is saved in 'selected'.
+ */
+var grid = "grid";
+var buttonGroup = "buttonGroup";
 
 //////////////////////////////////
 // Data source types ($type: ...)
 //////////////////////////////////
-var webService = {
-    type : 'webService'
-};
-var randomData = {
-    type : 'randomData'
-};
+var webService = "webService";
+var randomData = "randomData";
 
 //////////////////////////////////
 // Action types ($action: ...)
 //////////////////////////////////
-var refreshGrid = {
-    type : 'refreshGrid'
-};
-var openModal = {
-    type : 'openModal'
-};
-var closeModal = {
-    type : 'closeModal'
-};
-var callWs = {
-    type : 'callWs'
-};
+var refreshGrid = "refreshGrid";
+var openModal = "openModal";
+var closeModal = "closeModal";
+var callWs = "callWs";
+var bind = "callWs";
 
 
 //////////////////////////////////
 // Other types ($type: ...)
 //////////////////////////////////
-var model = {
-    type : 'model'
-};
-var binding = {
-    type : 'binding'
-};
+var binding = "binding";

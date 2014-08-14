@@ -1,7 +1,24 @@
 'use strict';
 
-test3hipsterApp.controller('requestMainFilterController', ['$scope', 'RequestMainFilter',
-    function ($scope, RequestMainFilter) {
+test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageService',
+    function ($scope, ReqMainPageService) {
+		$scope.selectedCustomers = null;
+		$scope.criteria = null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       $scope.data = {
             customerSearchModel: {
                 grid: {

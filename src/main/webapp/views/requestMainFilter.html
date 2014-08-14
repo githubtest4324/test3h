@@ -1,5 +1,5 @@
-<!--requestMainFilterController controller-->
-<div ng-controller="requestMainFilterController">
+<!--reqMainPageController controller-->
+<div ng-controller="reqMainPageController">
 
     <!--AA: <span ng-repeat="item in myData">{{item.name}}{{$last ? '' : ', '}}</span>-->
     <!--<br>-->
@@ -7,132 +7,152 @@
     <!--<br>-->
     <!--BBB: <pre>{{myData |json}}</pre>0-->
 
-    <!--requests/mainPage page-->
-    <div class="panel panel-default">
+    <!--reqMainPage page-->
+    <div id="reqMainPage">
         <!--criteria form-->
-        <div id="criteria" class="panel panel-default">
-            <div class="panel-heading">Filter</div>
-            <div class="panel-body">
-                <form class="form-horizontal" role="form" novalidate>
-                    <!--Code field-->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Code</label>
-
-                        <div class="col-sm-10">
-                            <input ng-model="data.criteriaModel.code" type="text" class="form-controll">
-                        </div>
-                    </div>
-                    <!--Name field-->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Name</label>
-
-                        <div class="col-sm-10">
-                            <input ng-model="data.criteriaModel.name" type="text" class="form-controll">
-                        </div>
-                    </div>
-                    <!--deliveryAddressCity field-->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Delivery city</label>
-
-                        <div class="col-sm-10">
-                            <input ng-model="data.criteriaModel.deliveryAddressCity" type="text" class="form-controll">
-                        </div>
-                    </div>
-                    <!--startDate field-->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">From</label>
-
-                        <div class="col-sm-10">
-                            <input ng-model="data.criteriaModel.startDate" type="date" class="form-controll">
-                        </div>
-                    </div>
-                    <!--endDate field-->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">To</label>
-
-                        <div class="col-sm-10">
-                            <input ng-model="data.criteriaModel.endDate" type="date" class="form-controll">
-                        </div>
-                    </div>
-                    <!--customers field-->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Customers</label>
-
-                        <div class="col-sm-10">
-                            <span style="border-width: 1px;" ng-repeat="item in data.criteriaModel.customers">{{item.name}}{{$last ? '' : ', '}}</span>
-                        </div>
-                    </div>
-                    <!--open action-->
-                    <div class="btn-group">
-                        <button ng-click="actions.openModal('customerSearch')"
-                                type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!--customerSearch modal-->
-    <div class="modal fade" id="customerSearch" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form name="form" role="form" novalidate
-                      class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
-                      ng-submit="create()">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myOrderLabel">Search customer</h4>
-                    </div>
-                    <div class="modal-body">
-                        <!--criteria form-->
-                        <form id="customerSearch.criteria" class="form-horizontal" role="form" novalidate>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input ng-model="customerSearch.criteria.name" type="text" class="form-controll">
+        <div class="row">
+            <div id="criteria" class="col-md-12">
+                <div class="panel panel-default" style="margin-bottom: 5px">
+                    <div class="panel-body">
+                        <form class="form" role="form" novalidate>
+                            <fieldset>
+                                <legend>Search requests</legend>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!--Code field-->
+                                        <div class="form-group">
+                                            <label>Code</label>
+                                            <input ng-model="data.criteriaModel.code" type="text" class="form-controll">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!--Name field-->
+                                        <div class="form-group">
+                                            <label class="control-label">Name</label>
+                                            <input ng-model="data.criteriaModel.name" type="text" class="form-controll">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Code</label>
-                                <div class="col-sm-10">
-                                    <input ng-model="customerSearch.criteria.code" type="text" class="form-controll">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!--startDate field-->
+                                        <div class="form-group">
+                                            <label class="control-label">From</label>
+                                            <input ng-model="data.criteriaModel.startDate" type="date"
+                                                   class="form-controll">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!--endDate field-->
+                                        <div class="form-group">
+                                            <label class="control-label">To</label>
+                                            <input ng-model="data.criteriaModel.endDate" type="date"
+                                                   class="form-controll">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">City name</label>
-                                <div class="col-sm-10">
-                                    <input ng-model="customerSearch.criteria.city" type="text" class="form-controll">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!--deliveryAddressCity field-->
+                                        <div class="form-group">
+                                            <label class="control-label">Delivery city</label>
+                                            <input ng-model="data.criteriaModel.deliveryAddressCity" type="text"
+                                                   class="form-controll">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <!--customers field-->
+                                            <label class="control-label">Customers</label>
+                                            <span style="border-width: 1px;"
+                                                  ng-repeat="item in data.criteriaModel.customers">{{item.name}}{{$last ? '' : ', '}}</span>
+                                            <!--open action-->
+                                            <div class="btn-group">
+                                                <button ng-click="actions.openModal('customerSearch')"
+                                                        type="button" class="btn btn-default"><i
+                                                        class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </fieldset>
                         </form>
-                        <!--refresh action-->
-                        <button ng-click="actions.refreshGrid('customerSearch.customerGrid')" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        <!--customerGrid grid-->
-                        <div id="customerSearch.customerGrid" style="height: 300px;" ng-grid="gridOptions.customerSearch.customerGrid"></div>
-                        <div class="btn-group">
-                            <!--ok-->
-                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i>
-                            </button>
-                            <!--cancel-->
-                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-ban-circle"></i>
-                            </button>
-                        </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+
+        <!--customerSearch modal-->
+        <div class="modal fade" id="customerSearch" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form name="form" role="form" novalidate
+                          class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+                          ng-submit="create()">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myOrderLabel">Search customer</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!--criteria form-->
+                            <form id="customerSearch.criteria" class="form-horizontal" role="form" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Name</label>
+
+                                    <div class="col-sm-10">
+                                        <input ng-model="customerSearch.criteria.name" type="text"
+                                               class="form-controll">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Code</label>
+
+                                    <div class="col-sm-10">
+                                        <input ng-model="customerSearch.criteria.code" type="text"
+                                               class="form-controll">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">City name</label>
+
+                                    <div class="col-sm-10">
+                                        <input ng-model="customerSearch.criteria.city" type="text"
+                                               class="form-controll">
+                                    </div>
+                                </div>
+                            </form>
+                            <!--refresh action-->
+                            <button ng-click="actions.refreshGrid('customerSearch.customerGrid')" type="button"
+                                    class="btn btn-default"><i class="fa fa-search"></i></button>
+                            <!--customerGrid grid-->
+                            <div id="customerSearch.customerGrid" style="height: 300px;"
+                                 ng-grid="gridOptions.customerSearch.customerGrid"></div>
+                            <div class="btn-group">
+                                <!--ok-->
+                                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i>
+                                </button>
+                                <!--cancel-->
+                                <button type="button" class="btn btn-default"><i
+                                        class="glyphicon glyphicon-ban-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 
-<div class="btn-toolbar" role="toolbar">
-    <div class="btn-group">
-        <button type="button" class="btn btn-default" tooltip="Search"><i class="fa fa-search"></i></button>
-        <button type="button" class="btn btn-default" tooltip="Open"><i class="fa fa-edit"></i></button>
-        <button type="button" class="btn btn-default" tooltip="Add"><i class="fa fa-plus"></i></button>
-        <button type="button" class="btn btn-default" tooltip="Remove"><i class="fa fa-minus"
-                                                                          style="color:#5660ff;"></i></button>
+        <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" tooltip="Search"><i class="fa fa-search"></i></button>
+                <button type="button" class="btn btn-default" tooltip="Open"><i class="fa fa-edit"></i></button>
+                <button type="button" class="btn btn-default" tooltip="Add"><i class="fa fa-plus"></i></button>
+                <button type="button" class="btn btn-default" tooltip="Remove"><i class="fa fa-minus"
+                                                                                  style="color:#5660ff;"></i></button>
+            </div>
+        </div>
     </div>
 </div>

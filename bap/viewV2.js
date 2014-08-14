@@ -148,6 +148,7 @@ var reqMainPage = {
 	$type: page,
 	$location: 'requests', // Disk location
 	$url: 'requests/mainPage', // Angular routing location
+	$pageId: 'reqMainPage',
 	$model: {
 		selectedCustomers: Customer
 	},
@@ -159,8 +160,9 @@ var reqMainPage = {
 		{
 			$id: 'criteria',
 			$type: form,
+			$title: 'Search requests',
 			$model: requestsByCriteriaWs.$input,
-			$bind: {
+			$bind: { // todo
 				$source: 'selectedCustomers',
 				$target: 'criteria.customers'
 			},
@@ -169,15 +171,18 @@ var reqMainPage = {
 				cols: 2
 			},
 			$fields: [
-				'name', 'code', 'deliveryAddressCity', 'startDate', 'endDate', 'customers',
-				{
-					$type: button,
-					$class: 'fa fa-search',
-					$onClick: {
-						$action: openModal,
-						$target: 'customerSearch'
-					}
-				}
+				['name', 'code'],
+				['endDate', 'startDate'],
+				['deliveryAddressCity',
+					['customers', {
+						$type: button,
+						$class: 'fa fa-search',
+						$onClick: {
+							$action: openModal,
+							$target: 'customerSearch'
+						}
+					}]
+				]
 			]
 		},
 		{
@@ -245,7 +250,7 @@ var reqMainPage = {
 				},
 				{
 					$type: container,
-					fields: [
+					$fields: [
 						'request.name', 'request.code', 'request.deliveryAddress.asString'
 					]
 				}
@@ -255,7 +260,12 @@ var reqMainPage = {
 	]
 };
 
+var toType = function (obj) {
+	return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+};
 
-writeFile('output.json', JSON.stringify(reqMainPage, null, 4));
+//writeFile('output.json', JSON.stringify(reqMainPage, null, 4));
+console.log(toType(reqMainPage.$view));
+console.log(reqMainPage.$view.length);
 //console.log(JSON.stringify(Country, null, 2));
 //console.log(x('liviu'));

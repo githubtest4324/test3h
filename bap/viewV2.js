@@ -27,16 +27,14 @@ var requestsByCriteriaWs = {
 		code: str,
 		deliveryAddressCity: str,
 		customers: {
-			$type: list,
-			$itemType: Customer
+			$type: Customer,
+			$list: true
+
 		},
 		startDate: date,
 		endDate: date
 	},
-	$output: {
-		$type: list,
-		$itemType: Request
-	}
+	$output: [Request]
 };
 
 var customersByCriteriaWs = {
@@ -48,8 +46,8 @@ var customersByCriteriaWs = {
 		city: str
 	},
 	$output: {
-		$type: list,
-		$itemType: Customer
+		$type: Customer,
+		$list: true
 	}
 };
 
@@ -67,9 +65,10 @@ var saveRequestWs = {
  * Output:
  * selectedCustomers - will receive the customer selected by user
  */
-var createCustomerSearchForm = {
-	$id: 'createCustomerSearchForm',
+var customerSearchForm = {
+	$id: 'customerSearchForm',
 	$type: modal,
+	$title: 'Search customer',
 	$template: {
 		$name: 'container_template',
 		cols: 1
@@ -80,30 +79,32 @@ var createCustomerSearchForm = {
 			$type: form,
 			$model: customersByCriteriaWs.$input,
 			$fields: [
-				'criteria.code', 'criteria.name', 'criteria.city'
+				'code', 'name', 'city'
 			]
 		},
 		{
 			$type: buttonGroup,
 			$fields: [
 				{
+					$type: button,
+					$icon: 'fa fa-search',
 					$action: refreshGrid,
-					$target: 'customerGrid'
+					$target: 'customerGrid' // todo
 				}
 			]
 		},
 		{
 			$id: 'customerGrid',
 			$type: grid,
-			$model: {
-				data: customersByCriteriaWs.$output,
+			$modelData: {
+				data: customersByCriteriaWs.$output
+			},
+			$modelSelected: {
 				selected: {
-					$type: list,
-					$itemType: Customer
+					$type: Customer,
+					$list: true
 				}
 			},
-			$dataRef: 'data',
-			$selectedRef: 'selected',
 			$multiSelect: true,
 			$dataSource: {
 				$source: customersByCriteriaWs,
@@ -174,14 +175,20 @@ var reqMainPage = {
 				['name', 'code'],
 				['endDate', 'startDate'],
 				['deliveryAddressCity',
-					['customers', {
-						$type: button,
-						$class: 'fa fa-search',
-						$onClick: {
-							$action: openModal,
-							$target: 'customerSearch'
+					[
+						{
+							$ref: 'customers.asString',
+							$display: text
+						},
+						{
+							$type: button,
+							$icon: 'fa fa-search',
+							$onClick: {
+								$action: openModal,
+								$target: 'customerSearchForm'
+							}
 						}
-					}]
+					]
 				]
 			]
 		},
@@ -204,11 +211,12 @@ var reqMainPage = {
 		{
 			$id: 'reqGrid',
 			$type: grid,
-			$model: {
-				data: requestsByCriteriaWs.$output,
-				selected: Request},
-			$dataRef: 'data',
-			$selectedRef: 'selected',
+			$modelData: {
+				data: requestsByCriteriaWs.$output
+			},
+			$modelSelected: {
+				selected: Request
+			},
 			$multiSelect: false,
 			$dataSource: {
 				$source: requestsByCriteriaWs,
@@ -256,7 +264,7 @@ var reqMainPage = {
 				}
 			]
 		},
-		createCustomerSearchForm
+		customerSearchForm
 	]
 };
 
@@ -264,8 +272,8 @@ var toType = function (obj) {
 	return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
 };
 
-//writeFile('output.json', JSON.stringify(reqMainPage, null, 4));
-console.log(toType(reqMainPage.$view));
-console.log(reqMainPage.$view.length);
+writeFile('output.json', JSON.stringify(reqMainPage, null, 4));
+//console.log(toType(reqMainPage.$view));
+//console.log(reqMainPage.$view.length);
 //console.log(JSON.stringify(Country, null, 2));
 //console.log(x('liviu'));

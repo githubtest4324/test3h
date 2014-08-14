@@ -1,7 +1,7 @@
 //////////////////////////////////
 // Field types ($type: ...)
 //////////////////////////////////
-
+var obj = "str";
 var str = "str";
 /**
  * Contains both date and time
@@ -73,3 +73,11 @@ var bind = "callWs";
 // Other types ($type: ...)
 //////////////////////////////////
 var binding = "binding";
+
+//////////////////////////////////
+// Relationships (%relationship: ...)
+//////////////////////////////////
+manyToOne = 'manyToOne';
+oneToMany = 'oneToMany';
+manyToMany = 'manyToMany';
+oneToOne = 'oneToOne';

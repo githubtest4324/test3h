@@ -86,22 +86,16 @@ var CustomerSearchForm = 'CustomerSearchForm';
 
 
 var userInterface = {
-	ReqMainPage: {
+	reqMainPage: {
 		type: page,
 		location: 'requests', // Disk location
 		url: 'requests/mainPage', // Angular routing location
 		model: {
 			selectedCustomers: Customer
 		},
-		$template: {
-			name: 'container_template',
-			properties: {
-				cols: 1
-			}
-		},
-		view: [
-			{
-				id: 'criteria',
+		columns: 1,
+		properties: {
+			'criteria': {
 				type: form,
 				title: 'Search requests',
 				model: RequestsByCriteriaWsInput,
@@ -109,22 +103,18 @@ var userInterface = {
 					source: 'selectedCustomers',
 					target: 'criteria.customers'
 				},
-				template: {
-					name: 'container_template',
-					properties: {
-						cols: 2
-					}
-				},
-				fields: [
-					['name', 'code'],
-					['endDate', 'startDate'],
-					['deliveryAddressCity',
-						[
-							{
-								ref: 'customers.asString',
-								display: text
-							},
-							{
+				columns: 2,
+				properties: {
+					'name': {type: text},
+					'code': {type: text},
+					'endDate': {type: datePicker},
+					'startDate': {type: datePicker},
+					'deliveryAddressCity': {type: text},
+					'customers': {
+						type: container,
+						properties: {
+							'customers.asString': {type: text},
+							'open': {
 								type: button,
 								icon: 'fa fa-search',
 								onClick: {
@@ -132,17 +122,15 @@ var userInterface = {
 									target: 'customerSearchForm'
 								}
 							}
-						]
-					]
-				]
+						}
+					}
+				}
 			},
-			{
-				id: 'gridActions',
+			'gridActions': {
 				type: buttonGroup,
 				collapse: false,
-				buttons: [
-					{
-						id: 'refresh',
+				properties: {
+					'refresh': {
 						type: button,
 						class: 'fa fa-search',
 						onClick: {
@@ -150,10 +138,9 @@ var userInterface = {
 							target: 'reqGrid'
 						}
 					}
-				]
+				}
 			},
-			{
-				id: 'reqGrid',
+			'reqGrid': {
 				type: grid,
 				multiSelect: false,
 				data: {
@@ -166,10 +153,9 @@ var userInterface = {
 					input: 'criteria',
 					output: 'data'
 				},
-				fields: [
+				properties: [
 					'data.code', 'data.description', 'data.deliveryAddress.asString', 'data.customer',
 					{ref: 'data.id', hidden: true}
-
 				],
 				onItemClick: {
 					action: bind,
@@ -177,9 +163,8 @@ var userInterface = {
 					target: 'requestDetails.request'
 				}
 			},
-			{
-				id: 'requestDetails',
-				type: form,
+			'requestDetails': {
+				type: container,
 				model: {
 					type: obj,
 					properties: {
@@ -187,10 +172,10 @@ var userInterface = {
 						saved: bool
 					}
 				},
-				view: [
-					{
+				properties: {
+					'actions': {
 						type: buttonGroup,
-						fields: [
+						properties: [
 							{
 								type: button,
 								onClick: {
@@ -202,20 +187,22 @@ var userInterface = {
 							}
 						]
 					},
-					{
-						type: container,
-						fields: [
-							'request.name', 'request.code', 'request.deliveryAddress.asString'
-						]
+					'form': {
+						type: form,
+						columns: 2,
+						properties: {
+							'request.name': {type: text},
+							'request.code': {type: text},
+							'request.deliveryAddress.asString': {type: text}
+						}
 					}
-				]
+				}
 			},
-			{
+			'customerSearchForm': {
 				type: ref,
 				ref: CustomerSearchForm
 			}
-
-		]
+		}
 	},
 	/**
 	 * Common dialog for selecting multiple customers.
@@ -225,34 +212,27 @@ var userInterface = {
 	CustomerSearchForm: {
 		type: modal,
 		title: 'Search customer',
-		template: {
-			name: 'container_template',
-			properties: {
-				cols: 1
-			}
-		},
-		view: [
-			{
-				id: 'criteria',
+		columns: 1,
+		properties: {
+			'criteria': {
 				type: form,
 				model: CustomersByCriteriaWsInput,
-				fields: [
-					'code', 'name', 'city'
-				]
+				properties: {
+					'code': {type: text}, 'name': {type: text}, 'city': {type: text}
+				}
 			},
-			{
+			'customerGridActions': {
 				type: buttonGroup,
-				fields: [
-					{
+				properties: {
+					refreshGrid: {
 						type: button,
 						icon: 'fa fa-search',
 						action: refreshGrid,
 						target: 'customerGrid' // todo
 					}
-				]
+				}
 			},
-			{
-				id: 'customerGrid',
+			'customerGrid': {
 				type: grid,
 				multiSelect: true,
 				data: {
@@ -268,21 +248,21 @@ var userInterface = {
 					input: 'criteria',
 					output: 'data'
 				},
-				$fields: [
+				fields: [
 					'data.name', 'data.code', 'data.address.asString',
 					{ref: 'data.id', hidden: true}
 				]
 			},
-			{
+			'footerActions': {
 				type: buttonGroup,
-				fields: [
-					{
+				properties: {
+					'close':{
 						type: button,
 						onClick: {
 							action: closeModal
 						}
 					},
-					{
+					'ok': {
 						type: button,
 						onClick: [
 							{
@@ -296,9 +276,9 @@ var userInterface = {
 						]
 					}
 
-				]
+				}
 			}
-		]
+		}
 	}
 }
 

@@ -1,7 +1,7 @@
 //////////////////////////////////
 // Field types ($type: ...)
 //////////////////////////////////
-var obj = "str";
+var obj = "obj";
 var str = "str";
 /**
  * Contains both date and time
@@ -73,6 +73,7 @@ var bind = "callWs";
 // Other types ($type: ...)
 //////////////////////////////////
 var binding = "binding";
+var ref = "ref";
 
 //////////////////////////////////
 // Relationships (%relationship: ...)

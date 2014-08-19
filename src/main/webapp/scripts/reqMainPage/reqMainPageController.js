@@ -1,27 +1,39 @@
 'use strict';
 
-test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageService', '$translate',
-	function ($scope, ReqMainPageService, $translate) {
+test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageService', '$translate', 'CommonsService',
+	function ($scope, ReqMainPageService, $translate, CommonsService) {
 		$scope.data = {
-			customerSearchModel: {
-				grid: {
-					customers: [
+			reqMainPage: {
+				criteria: {
+					customers: null
+				},
+				searchCustomer: {
+					criteria: null,
+					customerGrid: [
 						{id: 'id1', address: {id: 1, name: 'addr1', city: null, stati: null, asString: 'addr1As'}, name: 'Customer1', code: 'code1', asString: 'Cust1 str'},
 						{id: 'id2', address: null, name: 'Customer2', code: 'code2', asString: 'Cust2 str'},
 						{id: 'id3', address: null, name: 'Customer3', code: 'code3', asString: 'Cust3 str'},
 						{id: 'id4', address: null, name: 'Customer4', code: 'code4', asString: 'Cust4 str'}
 					]
 				}
-			},
-			selectedCustomers: null,
-			criteria: null,
-			customerSearchForm: {
-				criteria: null,
-				customerGrid: {
-					data: null,
-					selected: null,
-					gridOptions: {
-						data: 'data.customerSearchModel.grid.customers',
+			}
+		};
+
+		$scope.mySelections = [];
+		$scope.gridSelected = {
+			reqMainPage: {
+				searchCustomer: {
+					customerGrid: []
+				}
+			}
+		};
+
+		$scope.gridOptions = {
+			reqMainPage: {
+				searchCustomer: {
+					customerGrid: {
+						data: 'data.reqMainPage.searchCustomer.customerGrid',
+						selectedItems : $scope.gridSelected.reqMainPage.searchCustomer.customerGrid,
 						multiSelect: true,
 						enableRowSelection: true,
 						selectWithCheckboxOnly: true,
@@ -43,43 +55,34 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 					}
 				}
 			}
-		};
+		}
+
+		$scope.$watchCollection('gridSelected.reqMainPage.searchCustomer.customerGrid', function() {
+			$scope.data.reqMainPage.criteria.customers = $scope.gridSelected.reqMainPage.searchCustomer.customerGrid;
+		});
+
+
 		$scope.actions = {
-			openModal: function (target) {
-				var jqPath = '#'+target.replace('.', ' #');
-				$(jqPath).modal();
-			},
-			closeModal: function (target) {
-				var jqPath = '#'+target.replace('.', ' #');
-				$(jqPath).modal('hide');
-			},
-			refreshGrid: function (target) {
-				//todo: refresh grid's datasource
-			},
-			bind: function (source, destination) {
-				var realSource = '$scope.' + source;
-				var realDestination = '$scope' + destination;
-				var expr = realSource + "=" + realDestination;
-				eval(expr);
-			},
 			reqMainPage: {
 				criteria: {
 					customers: {
 						open: {
-							onClick: function(){
-								$scope.actions.openModal('reqMainPage.searchCustomer');
+							onClick: function () {
+								CommonsService.actions.openModal('reqMainPage.searchCustomer');
 							}
 						}
 					}
 				},
 				searchCustomer: {
-					CustomerSearchForm: {
-						footerActions: {
-							ok: {
-								onClick: function () {
-									bind('reqMainPage.searchCustomer.customerGrid.selected', 'reqMainPage.selectedCustomers');
-									closeModal('reqMainPage.searchCustomer');
-								}
+					footerActions: {
+						ok: {
+							onClick: function () {
+								CommonsService.actions.closeModal('reqMainPage.searchCustomer');
+							}
+						},
+						cancel: {
+							onClick: function () {
+								CommonsService.actions.closeModal('reqMainPage.searchCustomer');
 							}
 						}
 					}

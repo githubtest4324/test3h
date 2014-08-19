@@ -86,7 +86,7 @@ var CustomerSearchForm = 'CustomerSearchForm';
 
 
 var userInterface = {
-	reqMainPage: {
+	'reqMainPage': {
 		type: page,
 		location: 'requests', // Disk location
 		url: 'requests/mainPage', // Angular routing location
@@ -118,8 +118,8 @@ var userInterface = {
 								type: button,
 								icon: 'fa fa-search',
 								onClick: {
-									action: openModal,
-									target: 'customerSearchForm'
+									type: openModal,
+									target: 'searchCustomer.CustomerSearchForm'
 								}
 							}
 						}
@@ -130,11 +130,11 @@ var userInterface = {
 				type: buttonGroup,
 				collapse: false,
 				properties: {
-					'refresh': {
+					'refresh': { // todo
 						type: button,
 						class: 'fa fa-search',
 						onClick: {
-							action: refreshGrid,
+							type: refreshGrid,
 							target: 'reqGrid'
 						}
 					}
@@ -158,7 +158,7 @@ var userInterface = {
 					{ref: 'data.id', hidden: true}
 				],
 				onItemClick: {
-					action: bind,
+					type: bind,
 					source: 'reqGrid.selected',
 					target: 'requestDetails.request'
 				}
@@ -179,7 +179,7 @@ var userInterface = {
 							{
 								type: button,
 								onClick: {
-									action: callWs,
+									type: callWs,
 									ws: SaveRequestWs,
 									input: 'request',
 									output: 'saved'
@@ -198,10 +198,7 @@ var userInterface = {
 					}
 				}
 			},
-			'customerSearchForm': {
-				type: ref,
-				ref: CustomerSearchForm
-			}
+			'searchCustomer': CustomerSearchForm
 		}
 	},
 	/**
@@ -209,7 +206,7 @@ var userInterface = {
 	 * Output:
 	 * selectedCustomers - will receive the customer selected by user
 	 */
-	CustomerSearchForm: {
+	'CustomerSearchForm': {
 		type: modal,
 		title: 'Search customer',
 		columns: 1,
@@ -227,8 +224,10 @@ var userInterface = {
 					refreshGrid: {
 						type: button,
 						icon: 'fa fa-search',
-						action: refreshGrid,
-						target: 'customerGrid' // todo
+						onClick: {
+							type: refreshGrid,
+							target: 'customerGrid' // todo
+						}
 					}
 				}
 			},
@@ -259,19 +258,20 @@ var userInterface = {
 					'close':{
 						type: button,
 						onClick: {
-							action: closeModal
+							type: closeModal
 						}
 					},
 					'ok': {
 						type: button,
 						onClick: [
 							{
-								action: bind,
+								type: bind,
 								source: 'customerGrid.selected',
 								destination: 'selectedCustomers' // Output
 							},
 							{
-								action: closeModal
+								type: closeModal,
+								target: CustomerSearchForm
 							}
 						]
 					}

@@ -2,8 +2,6 @@
 
 test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageService', '$translate',
 	function ($scope, ReqMainPageService, $translate) {
-		$scope.xxx = $translate.instant('code');
-//		$scope.xxx = 'xx2';
 		$scope.data = {
 			customerSearchModel: {
 				grid: {
@@ -37,10 +35,10 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 						keepLastSelected: true,
 						enablePaging: false,
 						showFooter: false,
-						columnDefs:[
-							{field:'name', displayName: $translate.instant('name')},
-							{field:'code', displayName: $translate.instant('code')},
-							{field:'address.asString', displayName: $translate.instant('address')}
+						columnDefs: [
+							{field: 'name', displayName: $translate.instant('name')},
+							{field: 'code', displayName: $translate.instant('code')},
+							{field: 'address.asString', displayName: $translate.instant('address')}
 						]
 					}
 				}
@@ -48,10 +46,44 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 		};
 		$scope.actions = {
 			openModal: function (target) {
-				$('#' + target).modal();
+				var jqPath = '#'+target.replace('.', ' #');
+				$(jqPath).modal();
+			},
+			closeModal: function (target) {
+				var jqPath = '#'+target.replace('.', ' #');
+				$(jqPath).modal('hide');
 			},
 			refreshGrid: function (target) {
 				//todo: refresh grid's datasource
+			},
+			bind: function (source, destination) {
+				var realSource = '$scope.' + source;
+				var realDestination = '$scope' + destination;
+				var expr = realSource + "=" + realDestination;
+				eval(expr);
+			},
+			reqMainPage: {
+				criteria: {
+					customers: {
+						open: {
+							onClick: function(){
+								$scope.actions.openModal('reqMainPage.searchCustomer');
+							}
+						}
+					}
+				},
+				searchCustomer: {
+					CustomerSearchForm: {
+						footerActions: {
+							ok: {
+								onClick: function () {
+									bind('reqMainPage.searchCustomer.customerGrid.selected', 'reqMainPage.selectedCustomers');
+									closeModal('reqMainPage.searchCustomer');
+								}
+							}
+						}
+					}
+				}
 			}
 		};
 

@@ -8,7 +8,6 @@
     <!--BBB: <pre>{{myData |json}}</pre>0-->
 
     <!--reqMainPage page-->
-    aaa: {{xxx}}
     <div id="reqMainPage">
         <!--criteria form-->
         <div class="row">
@@ -69,7 +68,7 @@
                                                   ng-repeat="item in data.criteria.customers">{{item.asString}}{{$last ? '' : ', '}}</span>
                                             <!--open action-->
                                             <div class="btn-group">
-                                                <button ng-click="actions.openModal('customerSearchForm')"
+                                                <button ng-click="actions.reqMainPage.criteria.customers.open.onClick()"
                                                         type="button" class="btn btn-default"><i
                                                         class="fa fa-search"></i></button>
                                             </div>
@@ -84,7 +83,7 @@
         </div>
 
         <!--customerSearchForm modal-->
-        <div class="modal fade" id="customerSearchForm" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
+        <div class="modal fade" id="searchCustomer" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -119,7 +118,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!--refresh action-->
-                                <button ng-click="actions.refreshGrid('#customerSearchForm #customerGrid')" type="button"
+                                <button ng-click="actions.refreshGrid('#customerSearchForm #customerGrid')"
+                                        type="button"
                                         class="btn btn-default"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
@@ -134,7 +134,8 @@
                             <div class="col-md-12">
                                 <div class="btn-group">
                                     <!--ok-->
-                                    <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i>
+                                    <button type="button" class="btn btn-default" ng-click=""><i
+                                            class="glyphicon glyphicon-ok"></i>
                                     </button>
                                     <!--cancel-->
                                     <button type="button" class="btn btn-default"><i

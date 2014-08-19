@@ -27,39 +27,38 @@ import com.fasterxml.jackson.datatype.joda.deser.LocalDateDeserializer;
 public class Request implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public static final String ID = "id";
 	@Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
+	public static final String SERVICES = "services";
     @OneToMany(mappedBy="order")
     private Set<Service> services;
     
+    public static final String CREATION_DATE = "creationDate";
     @NotNull
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = CustomLocalDateSerializer.class)
     private LocalDate creationDate;
 
+    public static final String EXPECTED_DELIVERY_DATE = "expectedDeliveryDate";
     @NotNull
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = CustomLocalDateSerializer.class)
     private LocalDate expectedDeliveryDate;
 
+    public static final String CUSTOMER = "customer";
     @ManyToOne(targetEntity=Customer.class)
     private Customer customer;
 
+    public static final String DELIVERY_ADDRESS = "deliveryAddress";
     @ManyToOne
     private Address deliveryAddress;
     
-    public Address getDeliveryAddress() {
-		return deliveryAddress;
-	}
-
-	public void setDeliveryAddress(Address deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
-	}
-
+    public static final String CODE = "code";
 	private String code;
     
     public long getId() {
@@ -99,6 +98,14 @@ public class Request implements Serializable {
                 "id=" + id +"}";
     }
 
+    public Address getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public void setDeliveryAddress(Address deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+	}
+    
 	public LocalDate getCreationDate() {
 		return creationDate;
 	}

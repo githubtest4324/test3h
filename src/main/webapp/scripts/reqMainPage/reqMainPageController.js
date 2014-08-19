@@ -1,7 +1,19 @@
 'use strict';
 
-test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageService', '$translate', 'CommonsService',
-	function ($scope, ReqMainPageService, $translate, CommonsService) {
+test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageService', '$translate', 'CommonsService', '$http',
+	function ($scope, ReqMainPageService, $translate, CommonsService, $http) {
+
+		$scope.postData = function(){
+			$http({
+				method: 'POST',
+				url: 'app/rest/requests/byCriteria',
+				data: {"code":"req1"}
+			}).success(function(response) {
+				console.log(response)
+			}).error(function(response){
+				console.log(response)
+			});		}
+
 		$scope.data = {
 			reqMainPage: {
 				criteria: {

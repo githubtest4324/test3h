@@ -1,18 +1,32 @@
 package test3.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import test3.domain.Request;
-import test3.repository.RequestRepository;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import test3.domain.Request;
+import test3.repository.RequestRepository;
+
+import com.codahale.metrics.annotation.Timed;
+
 
 /**
  * REST controller for managing Request.
@@ -26,6 +40,23 @@ public class RequestResource {
     @Inject
     private RequestRepository requestRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+    
+    
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value="/rest/requests/byCriteria", produces=MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional
+    public List<Request> requestsByCriteriaWs(@RequestBody RequestsByCriteriaWsInput input){
+        Session session = entityManager.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(Request.class);
+        criteria.add(Restrictions.eq(Request.CODE, input.getCode()));
+        
+        return criteria.list();
+    }
+    
+    
     /**
      * POST  /rest/requests -> Create a new request.
      */

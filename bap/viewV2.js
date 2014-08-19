@@ -27,7 +27,7 @@ var CustomersByCriteriaWsInput = 'CustomersByCriteriaWsInput';
 var SaveRequestWs = 'SaveRequestWs';
 
 var webServices = {
-	'sendy.myApp.webServices': [
+	'ecom.webServices.requests': [
 		{
 			name: RequestsByCriteriaWsInput,
 			type: obj,
@@ -54,6 +54,15 @@ var webServices = {
 			}
 		},
 		{
+			name: SaveRequestWs,
+			type: webService,
+			url: 'res/requests.save',
+			input: Request,
+			output: bool
+		}
+	],
+	'ecom.webServices.customers': [
+		{
 			name: CustomersByCriteriaWsInput,
 			type: obj,
 			properties: {
@@ -72,13 +81,6 @@ var webServices = {
 				itemType: Customer
 			}
 		},
-		{
-			name: SaveRequestWs,
-			type: webService,
-			url: 'res/requests.save',
-			input: Request,
-			output: bool
-		}
 	]
 };
 
@@ -235,7 +237,7 @@ var userInterface = {
 				multiSelect: true,
 				model: {
 					type: obj,
-					properties:{
+					properties: {
 						data: {
 							type: list,
 							itemType: Customer
@@ -261,7 +263,7 @@ var userInterface = {
 			'footerActions': {
 				type: buttonGroup,
 				properties: {
-					'close':{
+					'close': {
 						type: button,
 						onClick: {
 							type: closeModal

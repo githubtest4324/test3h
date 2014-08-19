@@ -9,21 +9,15 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 				},
 				searchCustomer: {
 					criteria: null,
-					customerGrid: [
-						{id: 'id1', address: {id: 1, name: 'addr1', city: null, stati: null, asString: 'addr1As'}, name: 'Customer1', code: 'code1', asString: 'Cust1 str'},
-						{id: 'id2', address: null, name: 'Customer2', code: 'code2', asString: 'Cust2 str'},
-						{id: 'id3', address: null, name: 'Customer3', code: 'code3', asString: 'Cust3 str'},
-						{id: 'id4', address: null, name: 'Customer4', code: 'code4', asString: 'Cust4 str'}
-					]
-				}
-			}
-		};
-
-		$scope.mySelections = [];
-		$scope.gridSelected = {
-			reqMainPage: {
-				searchCustomer: {
-					customerGrid: []
+					customerGrid: {
+						data: [
+							{id: 'id1', address: {id: 1, name: 'addr1', city: null, stati: null, asString: 'addr1As'}, name: 'Customer1', code: 'code1', asString: 'Cust1 str'},
+							{id: 'id2', address: null, name: 'Customer2', code: 'code2', asString: 'Cust2 str'},
+							{id: 'id3', address: null, name: 'Customer3', code: 'code3', asString: 'Cust3 str'},
+							{id: 'id4', address: null, name: 'Customer4', code: 'code4', asString: 'Cust4 str'}
+						],
+						selected: []
+					}
 				}
 			}
 		};
@@ -32,8 +26,8 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 			reqMainPage: {
 				searchCustomer: {
 					customerGrid: {
-						data: 'data.reqMainPage.searchCustomer.customerGrid',
-						selectedItems : $scope.gridSelected.reqMainPage.searchCustomer.customerGrid,
+						data: 'data.reqMainPage.searchCustomer.customerGrid.data',
+						selectedItems: $scope.data.reqMainPage.searchCustomer.customerGrid.selected,
 						multiSelect: true,
 						enableRowSelection: true,
 						selectWithCheckboxOnly: true,
@@ -57,11 +51,6 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 			}
 		}
 
-		$scope.$watchCollection('gridSelected.reqMainPage.searchCustomer.customerGrid', function() {
-			$scope.data.reqMainPage.criteria.customers = $scope.gridSelected.reqMainPage.searchCustomer.customerGrid;
-		});
-
-
 		$scope.actions = {
 			reqMainPage: {
 				criteria: {
@@ -77,6 +66,9 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 					footerActions: {
 						ok: {
 							onClick: function () {
+								CommonsService.actions.bind($scope,
+									'data.reqMainPage.searchCustomer.customerGrid.selected',
+									'data.reqMainPage.criteria.customers');
 								CommonsService.actions.closeModal('reqMainPage.searchCustomer');
 							}
 						},

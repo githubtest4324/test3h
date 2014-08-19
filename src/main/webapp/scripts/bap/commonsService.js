@@ -14,8 +14,8 @@ test3hipsterApp.factory('CommonsService', function(){
 			},
 			bind: function ($scope, source, destination) {
 				var realSource = '$scope.' + source;
-				var realDestination = '$scope' + destination;
-				var expr = realSource + "=" + realDestination;
+				var realDestination = '$scope.' + destination;
+				var expr =  realDestination + "=" + 'angular.copy('+realSource+')';
 				eval(expr);
 			}
 		}

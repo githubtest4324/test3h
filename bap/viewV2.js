@@ -99,10 +99,6 @@ var userInterface = {
 				type: form,
 				title: 'Search requests',
 				model: RequestsByCriteriaWsInput,
-				bind: { // todo
-					source: 'selectedCustomers',
-					target: 'criteria.customers'
-				},
 				columns: 2,
 				properties: {
 					'name': {type: text},
@@ -198,7 +194,12 @@ var userInterface = {
 					}
 				}
 			},
-			'searchCustomer': CustomerSearchForm
+			'searchCustomer': {
+				type: CustomerSearchForm,
+				parameters: {
+					selectedCustomersParam: 'reqMainPage.criteria.customers'
+				}
+			}
 		}
 	},
 	/**
@@ -210,6 +211,7 @@ var userInterface = {
 		type: modal,
 		title: 'Search customer',
 		columns: 1,
+		inputParameters: ['selectedCustomersParam'],
 		properties: {
 			'criteria': {
 				type: form,
@@ -234,14 +236,12 @@ var userInterface = {
 			'customerGrid': {
 				type: grid,
 				multiSelect: true,
-				data: {
+				model: {
 					type: list,
 					itemType: Customer
 				},
-				selected: {
-					type: list,
-					itemType: Customer
-				},
+				data: 'customerGrid',
+				selected: 'selectedCustomersParam',
 				dataSource: {
 					source: CustomersByCriteriaWs,
 					input: 'criteria',

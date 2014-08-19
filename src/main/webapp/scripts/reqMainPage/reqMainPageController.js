@@ -1,18 +1,23 @@
 'use strict';
 
-test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageService', '$translate', 'CommonsService', '$http',
-	function ($scope, ReqMainPageService, $translate, CommonsService, $http) {
+test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageService', '$translate', 'CommonsService', '$http', 'WebServices',
+	function ($scope, ReqMainPageService, $translate, CommonsService, $http, WebServices) {
 
-		$scope.postData = function(){
-			$http({
-				method: 'POST',
-				url: 'app/rest/requests/byCriteria',
-				data: {"code":"req1"}
-			}).success(function(response) {
-				console.log(response)
-			}).error(function(response){
-				console.log(response)
-			});		}
+		$scope.aaa = null;
+
+		$scope.postData = function () {
+//			$http({
+//				method: 'POST',
+//				url: 'app/rest/requests/byCriteria',
+//				data: {"code": "req1"}
+//			}).success(function (response) {
+//				console.log(response)
+//			}).error(function (response) {
+//				console.log(response)
+//			});
+
+			WebServices.ecom.requests.RequestsByCriteriaWs($scope, {"code": "req1"}, 'aaa');
+		}
 
 		$scope.data = {
 			reqMainPage: {

@@ -90,9 +90,6 @@ var userInterface = {
 		type: page,
 		location: 'requests', // Disk location
 		url: 'requests/mainPage', // Angular routing location
-		model: {
-			selectedCustomers: Customer
-		},
 		columns: 1,
 		properties: {
 			'criteria': {
@@ -204,8 +201,8 @@ var userInterface = {
 	},
 	/**
 	 * Common dialog for selecting multiple customers.
-	 * Output:
-	 * selectedCustomers - will receive the customer selected by user
+	 * Input:
+	 * selectedCustomersParams - will receive the customers selected by user
 	 */
 	'CustomerSearchForm': {
 		type: modal,
@@ -237,8 +234,17 @@ var userInterface = {
 				type: grid,
 				multiSelect: true,
 				model: {
-					type: list,
-					itemType: Customer
+					type: obj,
+					properties:{
+						data: {
+							type: list,
+							itemType: Customer
+						},
+						selected: {
+							type: list,
+							itemType: Customer
+						}
+					}
 				},
 				data: 'customerGrid',
 				selected: 'selectedCustomersParam',
@@ -267,7 +273,7 @@ var userInterface = {
 							{
 								type: bind,
 								source: 'customerGrid.selected',
-								destination: 'selectedCustomers' // Output
+								destination: 'selectedCustomersParam' // Output
 							},
 							{
 								type: closeModal,

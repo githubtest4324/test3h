@@ -10,7 +10,6 @@ test3hipsterApp.factory('CommonsService', function(){
 				$(jqPath).modal('hide');
 			},
 			refreshGrid: function (target) {
-				//todo: refresh grid's datasource
 			},
 			bind: function ($scope, source, destination) {
 				var realSource = '$scope.' + source;

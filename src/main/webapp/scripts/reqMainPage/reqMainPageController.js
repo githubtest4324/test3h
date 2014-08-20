@@ -3,10 +3,10 @@
 test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageService', '$translate', 'CommonsService', '$http', 'WebServices',
 	function ($scope, ReqMainPageService, $translate, CommonsService, $http, WebServices) {
 
-		$scope.aaa = 'ss';
+		$scope.aaa = null;
 
 		$scope.postData = function () {
-			WebServices.ecom.requests.RequestsByCriteriaWs($scope, {"code": "req1"}, 'aaa');
+			WebServices.ecom.requests.RequestsByCriteriaWs($scope, {"code": "req2"}, 'aaa');
 		}
 
 		$scope.data = {
@@ -55,7 +55,7 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 						{field: 'code', displayName: $translate.instant('code')},
 						{field: 'description', displayName: $translate.instant('description')},
 						{field: 'deliveryAddress.asString', displayName: $translate.instant('address')},
-						{field: 'customer.asString', displayName: $translate.instant('address')}
+						{field: 'customer.asString', displayName: $translate.instant('customer')}
 					]
 				},
 				searchCustomer: {
@@ -93,6 +93,13 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 							onClick: function () {
 								CommonsService.actions.openModal('reqMainPage.searchCustomer');
 							}
+						}
+					}
+				},
+				gridActions: {
+					refresh: {
+						onClick: function(){
+								WebServices.ecom.requests.RequestsByCriteriaWs($scope, $scope.data.reqMainPage.criteria, 'data.reqMainPage.reqGrid.data');
 						}
 					}
 				},

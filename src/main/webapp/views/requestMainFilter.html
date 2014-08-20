@@ -30,14 +30,16 @@
                                         <!--Code field-->
                                         <div class="form-group">
                                             <label><span translate="code">Code</span></label>
-                                            <input ng-model="data.reqMainPage.criteria.code" type="text" class="form-controll">
+                                            <input ng-model="data.reqMainPage.criteria.code" type="text"
+                                                   class="form-controll">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <!--Name field-->
                                         <div class="form-group">
                                             <label class="control-label">Name</label>
-                                            <input ng-model="data.reqMainPage.criteria.name" type="text" class="form-controll">
+                                            <input ng-model="data.reqMainPage.criteria.name" type="text"
+                                                   class="form-controll">
                                         </div>
                                     </div>
                                 </div>
@@ -93,12 +95,20 @@
         <!--gridActions buttonGroup-->
         <div id="gridActions" class="btn-toolbar" role="toolbar">
             <div class="btn-group">
-                <button type="button" class="btn btn-default" data-toggle="tooltip" title="{{ 'refresh' | translate }}"><i class="fa fa-search"></i></button>
+                <button ng-click="actions.reqMainPage.gridActions.refresh.onClick()" type="button" class="btn btn-default" data-toggle="tooltip" title="{{ 'refresh' | translate }}">
+                    <i class="fa fa-search"></i></button>
+                <button type="button" class="btn btn-default"><i class="fa fa-edit"></i></button>
+                <button type="button" class="btn btn-default"><i class="fa fa-plus"></i></button>
+                <button type="button" class="btn btn-default"><i class="fa fa-minus"
+                                                                 style="color:#5660ff;"></i></button>
             </div>
         </div>
-        <span data-toggle="tooltip" data-placement="bottom" data-original-title="aaas">Hello ssss</span>
 
-        <!--customerSearchForm modal-->
+        <!--reqGrid grid-->
+        <div id="reqGrid" style="height: 300px;"
+             ng-grid="gridOptions.reqMainPage.reqGrid"></div>
+
+        <!--searchCustomer modal-->
         <div class="modal fade" id="searchCustomer" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
              aria-hidden="true">
             <div class="modal-dialog">
@@ -142,7 +152,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!--customerGrid grid-->
-                                <div id="customerSearch.customerGrid" style="height: 300px;"
+                                <div id="customerGrid" style="height: 300px;"
                                      ng-grid="gridOptions.reqMainPage.searchCustomer.customerGrid"></div>
                             </div>
                         </div>
@@ -151,12 +161,15 @@
                                 <!--footerActions buttonGroup-->
                                 <div class="btn-group">
                                     <!--ok-->
-                                    <button type="button" class="btn btn-default" ng-click="actions.reqMainPage.searchCustomer.footerActions.ok.onClick()"><i
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="actions.reqMainPage.searchCustomer.footerActions.ok.onClick()"><i
                                             class="glyphicon glyphicon-ok"></i>
                                     </button>
                                     <!--cancel-->
-                                    <button type="button" class="btn btn-default" ng-click="actions.reqMainPage.searchCustomer.footerActions.cancel.onClick()"><i
-                                            class="glyphicon glyphicon-ban-circle"></i>
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="actions.reqMainPage.searchCustomer.footerActions.cancel.onClick()">
+                                        <i
+                                                class="glyphicon glyphicon-ban-circle"></i>
                                     </button>
                                 </div>
                             </div>
@@ -167,14 +180,5 @@
         </div>
 
 
-        <div class="btn-toolbar" role="toolbar">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default" tooltip="Search"><i class="fa fa-search"></i></button>
-                <button type="button" class="btn btn-default" tooltip="Open"><i class="fa fa-edit"></i></button>
-                <button type="button" class="btn btn-default" tooltip="Add"><i class="fa fa-plus"></i></button>
-                <button type="button" class="btn btn-default" tooltip="Remove"><i class="fa fa-minus"
-                                                                                  style="color:#5660ff;"></i></button>
-            </div>
-        </div>
     </div>
 </div>

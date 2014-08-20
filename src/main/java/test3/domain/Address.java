@@ -17,6 +17,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Transient
 	private AddressComputed computed = new AddressComputed(this);
 
 	@Id

@@ -17,11 +17,12 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Transient
 	private CustomerComputed computed = new CustomerComputed(this);
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private long id;
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private long id;
 
 	private String name;
 
@@ -30,37 +31,36 @@ public class Customer implements Serializable {
 
 	@Transient
 	private String asString;
-	
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
 
-        Customer order = (Customer) o;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-        if (id != order.id) {
-            return false;
-        }
+		Customer order = (Customer) o;
 
-        return true;
-    }
+		if (id != order.id) {
+			return false;
+		}
 
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
-    }
-    
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +"}";
-    }
+		return true;
+	}
 
-    public Address getAddress() {
+	@Override
+	public int hashCode() {
+		return (int) (id ^ (id >>> 32));
+	}
+
+	@Override
+	public String toString() {
+		return "Order{" + "id=" + id + "}";
+	}
+
+	public Address getAddress() {
 		return address;
 	}
 
@@ -69,13 +69,12 @@ public class Customer implements Serializable {
 	}
 
 	public long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
-    
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -88,6 +87,5 @@ public class Customer implements Serializable {
 	public String getAsString() {
 		return computed.getAsString();
 	}
-
 
 }

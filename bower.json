@@ -2,6 +2,7 @@
   "name": "Test3Hipster",
   "version": "0.0.0",
   "dependencies": {
+	"bootstrap": "3.1.1",
     "bootstrap-sass": "twbs/bootstrap-sass#~3.1.1",
     "modernizr": "2.7.1",
     "jquery": "1.11.1",

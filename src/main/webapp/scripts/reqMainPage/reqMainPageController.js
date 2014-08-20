@@ -3,19 +3,9 @@
 test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageService', '$translate', 'CommonsService', '$http', 'WebServices',
 	function ($scope, ReqMainPageService, $translate, CommonsService, $http, WebServices) {
 
-		$scope.aaa = null;
+		$scope.aaa = 'ss';
 
 		$scope.postData = function () {
-//			$http({
-//				method: 'POST',
-//				url: 'app/rest/requests/byCriteria',
-//				data: {"code": "req1"}
-//			}).success(function (response) {
-//				console.log(response)
-//			}).error(function (response) {
-//				console.log(response)
-//			});
-
 			WebServices.ecom.requests.RequestsByCriteriaWs($scope, {"code": "req1"}, 'aaa');
 		}
 
@@ -23,6 +13,10 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 			reqMainPage: {
 				criteria: {
 					customers: null
+				},
+				reqGrid: {
+					data: [],
+					selected: []
 				},
 				searchCustomer: {
 					criteria: null,
@@ -41,6 +35,29 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 
 		$scope.gridOptions = {
 			reqMainPage: {
+				reqGrid: {
+					data: 'data.reqMainPage.reqGrid.data',
+					selectedItems: $scope.data.reqMainPage.reqGrid.selected,
+					multiSelect: true,
+					enableRowSelection: true,
+					selectWithCheckboxOnly: true,
+					showSelectionCheckbox: true,
+					enableColumnResize: true,
+					enableColumnReordering: true,
+					enableSorting: true,
+					headerRowHeight: 35,
+					footerRowHeight: 35,
+					rowHeight: 35,
+					keepLastSelected: true,
+					enablePaging: false,
+					showFooter: false,
+					columnDefs: [
+						{field: 'code', displayName: $translate.instant('code')},
+						{field: 'description', displayName: $translate.instant('description')},
+						{field: 'deliveryAddress.asString', displayName: $translate.instant('address')},
+						{field: 'customer.asString', displayName: $translate.instant('address')}
+					]
+				},
 				searchCustomer: {
 					customerGrid: {
 						data: 'data.reqMainPage.searchCustomer.customerGrid.data',

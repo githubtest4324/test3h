@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -16,6 +17,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private CustomerComputed computed = new CustomerComputed(this);
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
@@ -24,23 +27,10 @@ public class Customer implements Serializable {
 
 	@ManyToOne
 	private Address address;
+
+	@Transient
+	private String asString;
 	
-    public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -63,12 +53,29 @@ public class Customer implements Serializable {
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
-
+    
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +"}";
     }
+
+    public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
 
 	public String getName() {
 		return name;
@@ -77,5 +84,10 @@ public class Customer implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getAsString() {
+		return computed.getAsString();
+	}
+
 
 }

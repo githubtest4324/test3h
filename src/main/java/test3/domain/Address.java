@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -16,19 +17,24 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private AddressComputed computed = new AddressComputed(this);
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private long id;
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private long id;
 
 	private String name;
 
 	@ManyToOne
-	City city;
-	
+	private City city;
+
 	@ManyToOne
-	State state;
-	
-    public City getCity() {
+	private State state;
+
+	@Transient
+	private String asString;
+
+	public City getCity() {
 		return city;
 	}
 
@@ -45,41 +51,40 @@ public class Address implements Serializable {
 	}
 
 	public long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-        Address order = (Address) o;
+		Address order = (Address) o;
 
-        if (id != order.id) {
-            return false;
-        }
+		if (id != order.id) {
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
-    }
+	@Override
+	public int hashCode() {
+		return (int) (id ^ (id >>> 32));
+	}
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +"}";
-    }
+	@Override
+	public String toString() {
+		return "Order{" + "id=" + id + "}";
+	}
 
 	public String getName() {
 		return name;
@@ -87,6 +92,10 @@ public class Address implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getAsString() {
+		return computed.getAsString();
 	}
 
 }

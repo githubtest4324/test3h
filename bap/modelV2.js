@@ -59,9 +59,9 @@ var model = {
 					city: City,
 					state: State,
 					asString: {
-						$type: str,
-						$computed: true,
-						$i18n: 'address'
+						type: str,
+						computed: true,
+						i18n: 'address'
 					}
 				}
 			}
@@ -76,7 +76,8 @@ var model = {
 				address: Address,
 				asString: {
 					type: str,
-					transientDb: true
+					transientDb: true,
+					i18n: 'customer'
 				}
 
 			},
@@ -88,8 +89,8 @@ var model = {
 					code: str,
 					description: str,
 					request: {
-						$type: Request,
-						$relationship: manyToOne
+						type: Request,
+						relationship: manyToOne
 					}
 				}
 			},
@@ -108,8 +109,8 @@ var model = {
 					services: {
 						type: list,
 						itemType: Service,
-						$relationship: oneToMany,
-						$mappedBy: 'request'
+						relationship: oneToMany,
+						mappedBy: 'request'
 					}
 				}
 			}

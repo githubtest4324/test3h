@@ -80,7 +80,7 @@ var webServices = {
 				type: list,
 				itemType: Customer
 			}
-		},
+		}
 	]
 };
 
@@ -125,9 +125,10 @@ var userInterface = {
 				type: buttonGroup,
 				collapse: false,
 				properties: {
-					'refresh': { // todo
+					'refresh': {
 						type: button,
 						class: 'fa fa-search',
+						tooltip: 'refresh',
 						onClick: {
 							type: refreshGrid,
 							target: 'reqGrid'
@@ -138,19 +139,27 @@ var userInterface = {
 			'reqGrid': {
 				type: grid,
 				multiSelect: false,
-				data: {
-					type: list,
-					itemType: Request
+				model: {
+					type: obj,
+					properties: {
+						data: {
+							type: list,
+							itemType: Request
+						},
+						selected: {
+							type: Request
+						}
+					}
 				},
-				selected: Request,
+				data: 'reqGrid.data',
+				selected: 'reqGrid.selected',
 				dataSource: {
 					source: RequestsByCriteriaWs,
 					input: 'criteria',
 					output: 'data'
 				},
 				properties: [
-					'data.code', 'data.description', 'data.deliveryAddress.asString', 'data.customer',
-					{ref: 'data.id', hidden: true}
+					'code', 'description', 'deliveryAddress.asString', 'customer.asString'
 				],
 				onItemClick: {
 					type: bind,
@@ -248,16 +257,15 @@ var userInterface = {
 						}
 					}
 				},
-				data: 'customerGrid',
-				selected: 'selectedCustomersParam',
+				data: 'customerGrid.data',
+				selected: 'customerGrid.selected',
 				dataSource: {
 					source: CustomersByCriteriaWs,
 					input: 'criteria',
 					output: 'data'
 				},
 				fields: [
-					'data.name', 'data.code', 'data.address.asString',
-					{ref: 'data.id', hidden: true}
+					'name', 'code', 'address.asString'
 				]
 			},
 			'footerActions': {

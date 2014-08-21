@@ -197,8 +197,8 @@ var userInterface = {
 						type: form,
 						columns: 2,
 						properties: {
-							'reqGrid.selected.name': {type: text},
 							'reqGrid.selected.code': {type: text},
+							'reqGrid.selected.description': {type: text},
 							'reqGrid.selected.deliveryAddress.asString': {type: text, reqdOnly: true}
 						}
 					}

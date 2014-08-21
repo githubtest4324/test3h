@@ -16,13 +16,13 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 				},
 				reqGrid: {
 					data: [],
-					selected: []
+					selected: null
 				},
 				searchCustomer: {
 					criteria: null,
 					customerGrid: {
 						data: [],
-						selected: []
+						selected: null
 					}
 				},
 				requestDetails:{
@@ -36,7 +36,7 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 			reqMainPage: {
 				reqGrid: {
 					data: 'data.reqMainPage.reqGrid.data',
-					selectedItems: $scope.data.reqMainPage.reqGrid.selected,
+					selectedItems: [], // $scope.data.reqMainPage.reqGrid.selected
 					multiSelect: false,
 					enableRowSelection: true,
 					selectWithCheckboxOnly: false,
@@ -60,7 +60,7 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 				searchCustomer: {
 					customerGrid: {
 						data: 'data.reqMainPage.searchCustomer.customerGrid.data',
-						selectedItems: $scope.data.reqMainPage.searchCustomer.customerGrid.selected,
+						selectedItems: [],
 						multiSelect: true,
 						enableRowSelection: true,
 						selectWithCheckboxOnly: true,
@@ -82,7 +82,14 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 					}
 				}
 			}
-		}
+		};
+
+		$scope.$watchCollection('gridOptions.reqMainPage.reqGrid.selectedItems', function(newVal){
+			$scope.data.reqMainPage.reqGrid.selected = newVal[0];
+		});
+		$scope.$watchCollection('gridOptions.reqMainPage.searchCustomer.customerGrid.selectedItems', function(newVal){
+			$scope.data.reqMainPage.searchCustomer.customerGrid.selected = newVal;
+		});
 
 		$scope.actions = {
 			reqMainPage: {

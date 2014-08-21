@@ -1,19 +1,14 @@
 <!--reqMainPageController controller-->
 <div ng-controller="reqMainPageController">
 
-<!--AA: <span ng-repeat="item in myData">{{item.name}}{{$last ? '' : ', '}}</span>-->
+
+<!--<input type="button" ng-click="postData()" value="Post data"/>-->
+<!--<br/>-->
+<!--<pre></code>aaa: {{aaa | json}}</pre>-->
 <!--<br>-->
-<!--CCC: <pre>{{f('a.b.c')}}</pre>-->
+<!--selected: <pre>{{data.reqMainPage.reqGrid.selected | json}}</pre>-->
 <!--<br>-->
-<!--BBB: <pre>{{myData |json}}</pre>0-->
-
-
-
-<input type="button" ng-click="postData()" value="Post data"/>
-<br/>
-<pre></code>aaa: {{aaa | json}}</pre>
-<br>
-bbb: <pre>{{data.reqMainPage.reqGrid.selected | json}}</pre>
+<!--bbb: <pre>{{bbb | json}}</pre>-->
 
 <!--reqMainPage page-->
 <div id="reqMainPage">
@@ -199,19 +194,19 @@ bbb: <pre>{{data.reqMainPage.reqGrid.selected | json}}</pre>
                     <form>
                         <div class="row">
                             <div class="col-md-6">
-                                <!--name text-->
-                                <div class="form-group">
-                                    <label class="control-label">{{'name' | translate}}</label>
-                                    <input type="text" class="form-control"
-                                           ng-model="data.reqMainPage.reqGrid.selected.name"/>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
                                 <!--code text-->
                                 <div class="form-group">
                                     <label class="control-label">{{'code' | translate}}</label>
                                     <input type="text" class="form-control"
                                            ng-model="data.reqMainPage.reqGrid.selected.code"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!--name text-->
+                                <div class="form-group">
+                                    <label class="control-label">{{'description' | translate}}</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.reqMainPage.reqGrid.selected.description"/>
                                 </div>
                             </div>
                         </div>

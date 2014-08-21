@@ -29,83 +29,85 @@ public class Request implements Serializable {
 
 	public static final String ID = "id";
 	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private long id;
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private long id;
 
 	public static final String SERVICES = "services";
-    @OneToMany(mappedBy="order")
-    private Set<Service> services;
-    
-    public static final String CREATION_DATE = "creationDate";
-    @NotNull
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = CustomLocalDateSerializer.class)
-    private LocalDate creationDate;
+	@OneToMany(mappedBy = "order")
+	private Set<Service> services;
 
-    public static final String EXPECTED_DELIVERY_DATE = "expectedDeliveryDate";
-    @NotNull
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = CustomLocalDateSerializer.class)
-    private LocalDate expectedDeliveryDate;
+	public static final String CREATION_DATE = "creationDate";
+	@NotNull
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = CustomLocalDateSerializer.class)
+	private LocalDate creationDate;
 
-    public static final String CUSTOMER = "customer";
-    @ManyToOne(targetEntity=Customer.class)
-    private Customer customer;
+	public static final String EXPECTED_DELIVERY_DATE = "expectedDeliveryDate";
+	@NotNull
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = CustomLocalDateSerializer.class)
+	private LocalDate expectedDeliveryDate;
 
-    public static final String DELIVERY_ADDRESS = "deliveryAddress";
-    @ManyToOne
-    private Address deliveryAddress;
-    
-    public static final String CODE = "code";
+	public static final String CUSTOMER = "customer";
+	@ManyToOne(targetEntity = Customer.class)
+	private Customer customer;
+
+	public static final String DELIVERY_ADDRESS = "deliveryAddress";
+	@ManyToOne
+	private Address deliveryAddress;
+
+	public static final String CODE = "code";
 	private String code;
-    
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public static final String DESCRIPTION = "description";
+	private String description;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+	public long getId() {
+		return id;
+	}
 
-        Request order = (Request) o;
+	public void setId(long id) {
+		this.id = id;
+	}
 
-        if (id != order.id) {
-            return false;
-        }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-        return true;
-    }
+		Request order = (Request) o;
 
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
-    }
+		if (id != order.id) {
+			return false;
+		}
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +"}";
-    }
+		return true;
+	}
 
-    public Address getDeliveryAddress() {
+	@Override
+	public int hashCode() {
+		return (int) (id ^ (id >>> 32));
+	}
+
+	@Override
+	public String toString() {
+		return "Order{" + "id=" + id + "}";
+	}
+
+	public Address getDeliveryAddress() {
 		return deliveryAddress;
 	}
 
 	public void setDeliveryAddress(Address deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
 	}
-    
+
 	public LocalDate getCreationDate() {
 		return creationDate;
 	}
@@ -144,5 +146,13 @@ public class Request implements Serializable {
 
 	public void setServices(Set<Service> services) {
 		this.services = services;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

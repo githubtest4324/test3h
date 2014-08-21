@@ -12,7 +12,7 @@
 
     <input type="button" ng-click="postData()" value="Post data"/>
     <br/>
-    aaa: {{aaa}}
+    <pre></code>aaa: {{aaa | json}}</pre>
 
 
     <!--reqMainPage page-->
@@ -35,10 +35,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <!--Name field-->
+                                        <!--Description field-->
                                         <div class="form-group">
-                                            <label class="control-label">Name</label>
-                                            <input ng-model="data.reqMainPage.criteria.name" type="text"
+                                            <label class="control-label">{{'description' | translate}}</label>
+                                            <input ng-model="data.reqMainPage.criteria.description" type="text"
                                                    class="form-controll">
                                         </div>
                                     </div>

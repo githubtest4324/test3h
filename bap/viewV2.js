@@ -172,7 +172,7 @@ var userInterface = {
 				model: {
 					type: obj,
 					properties: {
-						request: Request,
+//						request: Request,
 						saved: bool
 					}
 				},
@@ -182,6 +182,8 @@ var userInterface = {
 						properties: [
 							{
 								type: button,
+								icon: 'fa fa-save',
+								tooltip: 'save',
 								onClick: {
 									type: callWs,
 									ws: SaveRequestWs,
@@ -191,13 +193,13 @@ var userInterface = {
 							}
 						]
 					},
-					'form': {
+					'requestForm': {
 						type: form,
 						columns: 2,
 						properties: {
-							'request.name': {type: text},
-							'request.code': {type: text},
-							'request.deliveryAddress.asString': {type: text}
+							'reqGrid.selected.name': {type: text},
+							'reqGrid.selected.code': {type: text},
+							'reqGrid.selected.deliveryAddress.asString': {type: text, reqdOnly: true}
 						}
 					}
 				}

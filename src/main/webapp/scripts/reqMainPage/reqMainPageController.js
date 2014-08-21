@@ -6,7 +6,7 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 		$scope.aaa = null;
 
 		$scope.postData = function () {
-			WebServices.ecom.requests.RequestsByCriteriaWs($scope, {"code": "req2"}, 'aaa');
+			WebServices.ecom.requests.CustomersByCriteriaWs($scope, {}, 'aaa');
 		}
 
 		$scope.data = {
@@ -21,12 +21,7 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 				searchCustomer: {
 					criteria: null,
 					customerGrid: {
-						data: [
-							{id: 1, address: {id: 1, name: 'addr1', city: null, state: null, asString: 'addr1As'}, name: 'Customer1', asString: 'Cust1 str'},
-							{id: 2, address: null, name: 'Customer2', asString: 'Cust2 str'},
-							{id: 3, address: null, name: 'Customer3', asString: 'Cust3 str'},
-							{id: 4, address: null, name: 'Customer4', asString: 'Cust4 str'}
-						],
+						data: [],
 						selected: []
 					}
 				}
@@ -104,6 +99,13 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 					}
 				},
 				searchCustomer: {
+					customerGridActions: {
+						refreshGrid: {
+							onClick: function(){
+								WebServices.ecom.requests.CustomersByCriteriaWs($scope, $scope.data.reqMainPage.searchCustomer.criteria, 'data.reqMainPage.searchCustomer.customerGrid.data');
+							}
+						}
+					},
 					footerActions: {
 						ok: {
 							onClick: function () {

@@ -10,10 +10,8 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.DisjunctionFragment;
 import org.hibernate.sql.JoinType;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
@@ -35,11 +33,6 @@ import test3.repository.CriteriaUtils;
 import test3.repository.RequestRepository;
 
 import com.codahale.metrics.annotation.Timed;
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * REST controller for managing Request.
@@ -89,7 +82,7 @@ public class RequestResource {
 			for (Customer cust : input.getCustomers()) {
 				custOr.add(Restrictions.eqOrIsNull(Customer.ID, cust.getId()));
 			}
-			criteria.add(custOr);
+			criteria.createCriteria(Request.CUSTOMER).add(custOr);
 		}
 
 		List<Request> res = criteria.list();

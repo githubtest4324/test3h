@@ -28,6 +28,9 @@ public class Customer implements Serializable {
 	public static final String NAME = "name";
 	private String name;
 
+	public static final String CODE = "code";
+	private String code;
+
 	public static final String ADDRESS = "address";
 	@ManyToOne
 	private Address address;
@@ -92,6 +95,14 @@ public class Customer implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

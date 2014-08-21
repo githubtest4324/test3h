@@ -19,55 +19,54 @@ public class Service implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private long id;
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private long id;
 
-    @Size(max = 50)
-    private String service;
+	@Size(max = 50)
+	private String service;
 
-    private BigDecimal unitPrice;
-    
-    private Double quantity;
-    
-    @ManyToOne(targetEntity=Request.class)
-    private Request order;
-    
-    public long getId() {
-        return id;
-    }
+	private BigDecimal unitPrice;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	private Double quantity;
 
+	@ManyToOne(targetEntity = Request.class)
+	private Request request;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+	public long getId() {
+		return id;
+	}
 
-        Service service = (Service) o;
+	public void setId(long id) {
+		this.id = id;
+	}
 
-        if (id != service.id) {
-            return false;
-        }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-        return true;
-    }
+		Service service = (Service) o;
 
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
-    }
+		if (id != service.id) {
+			return false;
+		}
 
-    @Override
-    public String toString() {
-        return "";
-    }
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) (id ^ (id >>> 32));
+	}
+
+	@Override
+	public String toString() {
+		return this.service == null ? "N/A" : this.service;
+	}
 
 	public String getService() {
 		return service;

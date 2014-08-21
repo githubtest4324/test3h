@@ -24,6 +24,10 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 						data: [],
 						selected: []
 					}
+				},
+				requestDetails:{
+					request: null,
+					saved: false
 				}
 			}
 		};
@@ -33,10 +37,10 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 				reqGrid: {
 					data: 'data.reqMainPage.reqGrid.data',
 					selectedItems: $scope.data.reqMainPage.reqGrid.selected,
-					multiSelect: true,
+					multiSelect: false,
 					enableRowSelection: true,
-					selectWithCheckboxOnly: true,
-					showSelectionCheckbox: true,
+					selectWithCheckboxOnly: false,
+					showSelectionCheckbox: false,
 					enableColumnResize: true,
 					enableColumnReordering: true,
 					enableSorting: true,

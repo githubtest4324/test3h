@@ -33,7 +33,7 @@ public class Request implements Serializable {
 	private long id;
 
 	public static final String SERVICES = "services";
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "request")
 	private Set<Service> services;
 
 	public static final String CREATION_DATE = "creationDate";

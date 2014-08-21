@@ -87,6 +87,10 @@ public class RequestResource {
 
 		List<Request> res = criteria.list();
 
+		// for (Request r : res) {
+		// r.getServices().size();
+		// }
+
 		return res;
 	}
 

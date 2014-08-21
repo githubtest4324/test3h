@@ -1,184 +1,234 @@
 <!--reqMainPageController controller-->
 <div ng-controller="reqMainPageController">
 
-    <!--AA: <span ng-repeat="item in myData">{{item.name}}{{$last ? '' : ', '}}</span>-->
-    <!--<br>-->
-    <!--CCC: <pre>{{f('a.b.c')}}</pre>-->
-    <!--<br>-->
-    <!--BBB: <pre>{{myData |json}}</pre>0-->
-
-    <!--aaa: {{data.reqMainPage.searchCustomer.customerGrid.selected}} bbb-->
+<!--AA: <span ng-repeat="item in myData">{{item.name}}{{$last ? '' : ', '}}</span>-->
+<!--<br>-->
+<!--CCC: <pre>{{f('a.b.c')}}</pre>-->
+<!--<br>-->
+<!--BBB: <pre>{{myData |json}}</pre>0-->
 
 
-    <input type="button" ng-click="postData()" value="Post data"/>
-    <br/>
-    <pre></code>aaa: {{aaa | json}}</pre>
 
+<input type="button" ng-click="postData()" value="Post data"/>
+<br/>
+<pre></code>aaa: {{aaa | json}}</pre>
+<br>
+bbb: <pre>{{data.reqMainPage.reqGrid.selected | json}}</pre>
 
-    <!--reqMainPage page-->
-    <div id="reqMainPage">
-        <!--criteria form-->
-        <div class="row">
-            <div id="criteria" class="col-md-12">
-                <div class="panel panel-default" style="margin-bottom: 5px">
-                    <div class="panel-body">
-                        <form class="form" role="form" novalidate>
-                            <fieldset>
-                                <legend>Search requests</legend>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <!--Code field-->
-                                        <div class="form-group">
-                                            <label><span translate="code">Code</span></label>
-                                            <input ng-model="data.reqMainPage.criteria.code" type="text"
-                                                   class="form-controll">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <!--Description field-->
-                                        <div class="form-group">
-                                            <label class="control-label">{{'description' | translate}}</label>
-                                            <input ng-model="data.reqMainPage.criteria.description" type="text"
-                                                   class="form-controll">
-                                        </div>
+<!--reqMainPage page-->
+<div id="reqMainPage">
+<!--criteria form-->
+<div class="row">
+    <div id="criteria" class="col-md-12">
+        <div class="panel panel-default" style="margin-bottom: 5px">
+            <div class="panel-body">
+                <form class="form" role="form" novalidate>
+                    <fieldset>
+                        <legend>Search requests</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--Code field-->
+                                <div class="form-group">
+                                    <label><span translate="code">Code</span></label>
+                                    <input ng-model="data.reqMainPage.criteria.code" type="text"
+                                           class="form-controll">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!--Description field-->
+                                <div class="form-group">
+                                    <label class="control-label">{{'description' | translate}}</label>
+                                    <input ng-model="data.reqMainPage.criteria.description" type="text"
+                                           class="form-controll">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--startDate field-->
+                                <div class="form-group">
+                                    <label class="control-label">From</label>
+                                    <input ng-model="data.reqMainPage.criteria.startDate" type="date"
+                                           class="form-controll">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!--endDate field-->
+                                <div class="form-group">
+                                    <label class="control-label">To</label>
+                                    <input ng-model="data.reqMainPage.criteria.endDate" type="date"
+                                           class="form-controll">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--deliveryAddressCity field-->
+                                <div class="form-group">
+                                    <label class="control-label">Delivery city</label>
+                                    <input ng-model="data.reqMainPage.criteria.deliveryAddressCity" type="text"
+                                           class="form-controll">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <!--customers field-->
+                                    <label class="control-label">Customers</label>
+                                                <span style="border-width: 1px;"
+                                                      ng-repeat="item in data.reqMainPage.criteria.customers">{{item.asString}}{{$last ? '' : ', '}}</span>
+                                    <!--open action-->
+                                    <div class="btn-group">
+                                        <button ng-click="actions.reqMainPage.criteria.customers.open.onClick()"
+                                                type="button" class="btn btn-default"><i
+                                                class="fa fa-search"></i></button>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <!--startDate field-->
-                                        <div class="form-group">
-                                            <label class="control-label">From</label>
-                                            <input ng-model="data.reqMainPage.criteria.startDate" type="date"
-                                                   class="form-controll">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <!--endDate field-->
-                                        <div class="form-group">
-                                            <label class="control-label">To</label>
-                                            <input ng-model="data.reqMainPage.criteria.endDate" type="date"
-                                                   class="form-controll">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <!--deliveryAddressCity field-->
-                                        <div class="form-group">
-                                            <label class="control-label">Delivery city</label>
-                                            <input ng-model="data.reqMainPage.criteria.deliveryAddressCity" type="text"
-                                                   class="form-controll">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <!--customers field-->
-                                            <label class="control-label">Customers</label>
-                                            <span style="border-width: 1px;"
-                                                  ng-repeat="item in data.reqMainPage.criteria.customers">{{item.asString}}{{$last ? '' : ', '}}</span>
-                                            <!--open action-->
-                                            <div class="btn-group">
-                                                <button ng-click="actions.reqMainPage.criteria.customers.open.onClick()"
-                                                        type="button" class="btn btn-default"><i
-                                                        class="fa fa-search"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--gridActions buttonGroup-->
+<div id="gridActions" class="btn-toolbar" role="toolbar">
+    <div class="btn-group">
+        <button ng-click="actions.reqMainPage.gridActions.refresh.onClick()" type="button" class="btn btn-default"
+                data-toggle="tooltip" title="{{ 'refresh' | translate }}">
+            <i class="fa fa-search"></i></button>
+        <button type="button" class="btn btn-default"><i class="fa fa-edit"></i></button>
+        <button type="button" class="btn btn-default"><i class="fa fa-plus"></i></button>
+        <button type="button" class="btn btn-default"><i class="fa fa-minus"
+                                                         style="color:#5660ff;"></i></button>
+    </div>
+</div>
+
+<!--reqGrid grid-->
+<div id="reqGrid" style="height: 300px;"
+     ng-grid="gridOptions.reqMainPage.reqGrid"></div>
+
+<!--searchCustomer modal-->
+<div class="modal fade" id="searchCustomer" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Search customer</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--criteria form-->
+                        <form id="customerSearch.criteria" class="form" role="form" novalidate>
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input ng-model="data.reqMainPage.searchCustomer.criteria.name" type="text"
+                                       class="form-controll">
+                            </div>
+                            <div class="form-group">
+                                <label>Code</label>
+
+                                <input ng-model="data.reqMainPage.searchCustomer.criteria.code" type="text"
+                                       class="form-controll">
+                            </div>
+                            <div class="form-group">
+                                <label>City name</label>
+                                <input ng-model="data.reqMainPage.searchCustomer.criteria.city" type="text"
+                                       class="form-controll">
+                            </div>
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!--gridActions buttonGroup-->
-        <div id="gridActions" class="btn-toolbar" role="toolbar">
-            <div class="btn-group">
-                <button ng-click="actions.reqMainPage.gridActions.refresh.onClick()" type="button" class="btn btn-default" data-toggle="tooltip" title="{{ 'refresh' | translate }}">
-                    <i class="fa fa-search"></i></button>
-                <button type="button" class="btn btn-default"><i class="fa fa-edit"></i></button>
-                <button type="button" class="btn btn-default"><i class="fa fa-plus"></i></button>
-                <button type="button" class="btn btn-default"><i class="fa fa-minus"
-                                                                 style="color:#5660ff;"></i></button>
-            </div>
-        </div>
-
-        <!--reqGrid grid-->
-        <div id="reqGrid" style="height: 300px;"
-             ng-grid="gridOptions.reqMainPage.reqGrid"></div>
-
-        <!--searchCustomer modal-->
-        <div class="modal fade" id="searchCustomer" tabindex="-1" role="dialog" aria-labelledby="myOrderLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Search customer</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--refresh action-->
+                        <button ng-click="actions.reqMainPage.searchCustomer.customerGridActions.refreshGrid.onClick()"
+                                type="button"
+                                class="btn btn-default"><i class="fa fa-search"></i></button>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!--criteria form-->
-                                <form id="customerSearch.criteria" class="form" role="form" novalidate>
-                                    <div class="form-group">
-                                        <label>Name</label>
-                                        <input ng-model="data.reqMainPage.searchCustomer.criteria.name" type="text"
-                                               class="form-controll">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Code</label>
-
-                                        <input ng-model="data.reqMainPage.searchCustomer.criteria.code" type="text"
-                                               class="form-controll">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>City name</label>
-                                        <input ng-model="data.reqMainPage.searchCustomer.criteria.city" type="text"
-                                               class="form-controll">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!--refresh action-->
-                                <button ng-click="actions.reqMainPage.searchCustomer.customerGridActions.refreshGrid.onClick()"
-                                        type="button"
-                                        class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!--customerGrid grid-->
-                                <div id="customerGrid" style="height: 300px;"
-                                     ng-grid="gridOptions.reqMainPage.searchCustomer.customerGrid"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!--footerActions buttonGroup-->
-                                <div class="btn-group">
-                                    <!--ok-->
-                                    <button type="button" class="btn btn-default"
-                                            ng-click="actions.reqMainPage.searchCustomer.footerActions.ok.onClick()"><i
-                                            class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <!--cancel-->
-                                    <button type="button" class="btn btn-default"
-                                            ng-click="actions.reqMainPage.searchCustomer.footerActions.cancel.onClick()">
-                                        <i
-                                                class="glyphicon glyphicon-ban-circle"></i>
-                                    </button>
-                                </div>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--customerGrid grid-->
+                        <div id="customerGrid" style="height: 300px;"
+                             ng-grid="gridOptions.reqMainPage.searchCustomer.customerGrid"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--footerActions buttonGroup-->
+                        <div class="btn-group">
+                            <!--ok-->
+                            <button type="button" class="btn btn-default"
+                                    ng-click="actions.reqMainPage.searchCustomer.footerActions.ok.onClick()"><i
+                                    class="glyphicon glyphicon-ok"></i>
+                            </button>
+                            <!--cancel-->
+                            <button type="button" class="btn btn-default"
+                                    ng-click="actions.reqMainPage.searchCustomer.footerActions.cancel.onClick()">
+                                <i
+                                        class="glyphicon glyphicon-ban-circle"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
+</div>
+
+<!--requestDetails container-->
+<div id="requestDetails">
+    <div class="row">
+        <div class="col-md-12">
+            <!--actions buttonGroup-->
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" ng-click="" data-toggle="tooltip"
+                        title="{{'save' | translate}}"><i class="fa fa-save"/></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!--requestForm form-->
+            <div id="requestForm" class="panel panel-default">
+                <div class="panel-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--name text-->
+                                <div class="form-group">
+                                    <label class="control-label">{{'name' | translate}}</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.reqMainPage.reqGrid.selected.name"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!--code text-->
+                                <div class="form-group">
+                                    <label class="control-label">{{'code' | translate}}</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.reqMainPage.reqGrid.selected.code"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">{{'deliveryAddress' | translate}}</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.reqMainPage.reqGrid.selected.deliveryAddress.asString"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 </div>

@@ -10,7 +10,10 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.DisjunctionFragment;
 import org.hibernate.sql.JoinType;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import test3.domain.Address;
 import test3.domain.City;
+import test3.domain.Customer;
 import test3.domain.Request;
 import test3.repository.CriteriaUtils;
 import test3.repository.RequestRepository;
@@ -59,8 +63,14 @@ public class RequestResource {
 	public List<Request> requestsByCriteriaWs(@RequestBody RequestsByCriteriaWsInput input) {
 		Session session = entityManager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Request.class);
+
+		// Code
 		CriteriaUtils.like(criteria, input.getCode(), Request.CODE);
+
+		// Description
 		CriteriaUtils.like(criteria, input.getDescription(), Request.DESCRIPTION);
+
+		// Delivery date
 		if (input.getStartDate() != null) {
 			criteria.add(Restrictions.ge(Request.EXPECTED_DELIVERY_DATE, new LocalDate(input.getStartDate())));
 		}
@@ -68,19 +78,21 @@ public class RequestResource {
 			criteria.add(Restrictions.le(Request.EXPECTED_DELIVERY_DATE, new LocalDate(input.getEndDate())));
 		}
 
+		// Delivery city
 		CriteriaUtils.like(
 				criteria.createCriteria(Request.DELIVERY_ADDRESS, JoinType.LEFT_OUTER_JOIN).createCriteria(Address.CITY,
 						JoinType.LEFT_OUTER_JOIN), input.getDeliveryAddressCity(), City.NAME);
 
-		ObjectMapper mapper = new ObjectMapper();
-		List<Request> res = criteria.list();
+		// Customers
+		if (input.getCustomers() != null) {
+			Junction custOr = Restrictions.disjunction();
+			for (Customer cust : input.getCustomers()) {
+				custOr.add(Restrictions.eqOrIsNull(Customer.ID, cust.getId()));
+			}
+			criteria.add(custOr);
+		}
 
-		// try {
-		// String json = mapper.writeValueAsString(res);
-		// System.out.println(json);
-		// } catch (JsonProcessingException e) {
-		// e.printStackTrace();
-		// }
+		List<Request> res = criteria.list();
 
 		return res;
 	}

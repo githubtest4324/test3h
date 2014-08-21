@@ -20,17 +20,27 @@ public class Customer implements Serializable {
 	@Transient
 	private CustomerComputed computed = new CustomerComputed(this);
 
+	public static final String ID = "id";
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 
+	public static final String NAME = "name";
 	private String name;
 
+	public static final String ADDRESS = "address";
 	@ManyToOne
 	private Address address;
 
-	@Transient
-	private String asString;
+	public static final String AS_STRING = "asString";
+
+	public String getAsString() {
+		return computed.getAsString();
+	}
+
+	public void setAsString(String value) {
+		computed.setAsString(value);
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -82,10 +92,6 @@ public class Customer implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getAsString() {
-		return computed.getAsString();
 	}
 
 }

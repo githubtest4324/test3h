@@ -22,10 +22,10 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 					criteria: null,
 					customerGrid: {
 						data: [
-							{id: 'id1', address: {id: 1, name: 'addr1', city: null, stati: null, asString: 'addr1As'}, name: 'Customer1', code: 'code1', asString: 'Cust1 str'},
-							{id: 'id2', address: null, name: 'Customer2', code: 'code2', asString: 'Cust2 str'},
-							{id: 'id3', address: null, name: 'Customer3', code: 'code3', asString: 'Cust3 str'},
-							{id: 'id4', address: null, name: 'Customer4', code: 'code4', asString: 'Cust4 str'}
+							{id: 1, address: {id: 1, name: 'addr1', city: null, state: null, asString: 'addr1As'}, name: 'Customer1', asString: 'Cust1 str'},
+							{id: 2, address: null, name: 'Customer2', asString: 'Cust2 str'},
+							{id: 3, address: null, name: 'Customer3', asString: 'Cust3 str'},
+							{id: 4, address: null, name: 'Customer4', asString: 'Cust4 str'}
 						],
 						selected: []
 					}

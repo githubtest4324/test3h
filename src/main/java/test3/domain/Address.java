@@ -12,9 +12,6 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Address implements Serializable {
@@ -43,6 +40,10 @@ public class Address implements Serializable {
 
 	public String getAsString() {
 		return computed.getAsString();
+	}
+
+	public void setAsString(String value) {
+		computed.setAsString(value);
 	}
 
 	@Override

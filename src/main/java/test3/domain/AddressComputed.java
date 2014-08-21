@@ -16,4 +16,9 @@ public class AddressComputed {
 		return String.format("%s-%s-%s", name, city, country);
 	}
 
+	public void setAsString(String value) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

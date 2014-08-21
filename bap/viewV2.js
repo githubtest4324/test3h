@@ -32,7 +32,7 @@ var webServices = {
 			name: RequestsByCriteriaWsInput,
 			type: obj,
 			properties: {
-				name: str,
+				description: str,
 				code: str,
 				deliveryAddressCity: str,
 				customers: {
@@ -100,7 +100,7 @@ var userInterface = {
 				model: RequestsByCriteriaWsInput,
 				columns: 2,
 				properties: {
-					'name': {type: text},
+					'description': {type: text},
 					'code': {type: text},
 					'endDate': {type: datePicker},
 					'startDate': {type: datePicker},

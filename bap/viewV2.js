@@ -46,7 +46,7 @@ var webServices = {
 		{
 			name: RequestsByCriteriaWs,
 			type: webService,
-			url: 'res/requests/byCriteria',
+			url: 'app/res/requests/byCriteria',
 			input: RequestsByCriteriaWsInput,
 			output: {
 				type: list,
@@ -74,7 +74,7 @@ var webServices = {
 		{
 			name: CustomersByCriteriaWs,
 			type: webService,
-			url: 'res/customers/byCriteria',
+			url: 'app/res/customers/byCriteria',
 			input: CustomersByCriteriaWsInput,
 			output: {
 				type: list,
@@ -236,7 +236,7 @@ var userInterface = {
 						icon: 'fa fa-search',
 						onClick: {
 							type: refreshGrid,
-							target: 'customerGrid' // todo
+							target: 'customerGrid'
 						}
 					}
 				}

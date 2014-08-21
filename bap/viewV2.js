@@ -56,7 +56,7 @@ var webServices = {
 		{
 			name: SaveRequestWs,
 			type: webService,
-			url: 'res/requests.save',
+			url: 'app/res/requests/save',
 			input: Request,
 			output: bool
 		}
@@ -172,26 +172,25 @@ var userInterface = {
 				model: {
 					type: obj,
 					properties: {
-//						request: Request,
 						saved: bool
 					}
 				},
 				properties: {
 					'actions': {
 						type: buttonGroup,
-						properties: [
-							{
+						properties: {
+							save: {
 								type: button,
 								icon: 'fa fa-save',
 								tooltip: 'save',
 								onClick: {
 									type: callWs,
 									ws: SaveRequestWs,
-									input: 'request',
+									input: 'reqGrid.selected',
 									output: 'saved'
 								}
 							}
-						]
+						}
 					},
 					'requestForm': {
 						type: form,

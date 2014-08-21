@@ -6,7 +6,18 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 		$scope.aaa = null;
 
 		$scope.postData = function () {
-			WebServices.ecom.requests.CustomersByCriteriaWs($scope, {}, 'aaa');
+//			WebServices.ecom.requests.SaveRequestWs($scope, {id: 3, code: 'xxx'}, 'aaa');
+			$http({
+				method: 'POST',
+				url: 'app/res/requests/save',
+//				url: 'app/res/customers/byCriteria',
+				data: {id: 3, code: 'xxx'}
+//				data: "sssss"
+			}).success(function (response) {
+				console.log(response);
+			}).error(function (response) {
+				console.log(response);
+			});
 		}
 
 		$scope.data = {
@@ -129,6 +140,15 @@ test3hipsterApp.controller('reqMainPageController', ['$scope', 'ReqMainPageServi
 						cancel: {
 							onClick: function () {
 								CommonsService.actions.closeModal('reqMainPage.searchCustomer');
+							}
+						}
+					}
+				},
+				requestDetails:{
+					actions: {
+						save: {
+							onClick: function(){
+								WebServices.ecom.requests.SaveRequestWs($scope, $scope.data.reqMainPage.reqGrid.selected, 'data.reqMainPage.requestDetails.saved');
 							}
 						}
 					}

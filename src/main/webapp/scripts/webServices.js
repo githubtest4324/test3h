@@ -27,6 +27,19 @@ test3hipsterApp.factory('WebServices', ['$http', function($http){
 					}).error(function (response) {
 						console.log(response);
 					});
+				},
+				SaveRequestWs: function($scope, input, outputRef){
+					$http({
+						method: 'POST',
+						url: 'app/res/requests/save',
+						data: input
+					}).success(function (response) {
+						var realOutputRef = '$scope.' + outputRef;
+						var expr =  realOutputRef + "=response";
+						eval(expr);
+					}).error(function (response) {
+						console.log(response);
+					});
 				}
 			}
 		}

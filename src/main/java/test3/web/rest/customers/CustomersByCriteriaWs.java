@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.sql.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class CustomersByCriteriaWs {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "app/res/customers/byCriteria")
 	@Transactional
-	public List<Customer> execute(CustomersByCriteriaWsInput input) {
+	public List<Customer> execute(@RequestBody CustomersByCriteriaWsInput input) {
 		Session session = entityManager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Customer.class);
 		// Name

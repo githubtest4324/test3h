@@ -2,13 +2,13 @@
 <div ng-controller="reqMainPageController">
 
 
-<!--<input type="button" ng-click="postData()" value="Post data"/>-->
-<!--<br/>-->
-<!--<pre></code>aaa: {{aaa | json}}</pre>-->
+<input type="button" ng-click="postData()" value="Post data"/>
+<br/>
+<pre></code>aaa: {{aaa | json}}</pre>
 <!--<br>-->
 <!--selected: <pre>{{data.reqMainPage.reqGrid.selected | json}}</pre>-->
 <!--<br>-->
-<!--bbb: <pre>{{bbb | json}}</pre>-->
+<!--bbb: <pre>{{data.reqMainPage.reqGrid.selected | json}}</pre>-->
 
 <!--reqMainPage page-->
 <div id="reqMainPage">
@@ -181,7 +181,7 @@
         <div class="col-md-12">
             <!--actions buttonGroup-->
             <div class="btn-group">
-                <button type="button" class="btn btn-default" ng-click="" data-toggle="tooltip"
+                <button type="button" class="btn btn-default" ng-click="actions.reqMainPage.requestDetails.actions.save.onClick()" data-toggle="tooltip"
                         title="{{'save' | translate}}"><i class="fa fa-save"/></button>
             </div>
         </div>
@@ -215,7 +215,7 @@
                                 <div class="form-group">
                                     <label class="control-label">{{'deliveryAddress' | translate}}</label>
                                     <input type="text" class="form-control"
-                                           ng-model="data.reqMainPage.reqGrid.selected.deliveryAddress.asString"/>
+                                           ng-model="data.reqMainPage.reqGrid.selected.deliveryAddress.asString" readonly/>
                                 </div>
                             </div>
                         </div>

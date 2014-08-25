@@ -74,6 +74,8 @@ var bind = "callWs";
 //////////////////////////////////
 var binding = "binding";
 var ref = "ref";
+var namespace = 'namespace';
+var entity = 'entity';
 
 //////////////////////////////////
 // Relationships (%relationship: ...)

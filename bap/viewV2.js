@@ -27,61 +27,70 @@ var CustomersByCriteriaWsInput = 'CustomersByCriteriaWsInput';
 var SaveRequestWs = 'SaveRequestWs';
 
 var webServices = {
-	'ecom.webServices.requests': [
-		{
-			name: RequestsByCriteriaWsInput,
-			type: obj,
-			properties: {
-				description: str,
-				code: str,
-				deliveryAddressCity: str,
-				customers: {
-					type: list,
-					itemType: Customer
-				},
-				startDate: date,
-				endDate: date
+	'ecom': {
+		type: namespace,
+		properties: {
+			webServices: {
+				type: namespace,
+				properties: {
+					requests: {
+						type: namespace,
+						properties: {
+							RequestsByCriteriaWsInput: {
+								type: entity,
+								properties: {
+									description: str,
+									code: str,
+									deliveryAddressCity: str,
+									customers: {
+										type: list,
+										itemType: Customer
+									},
+									startDate: date,
+									endDate: date
+								}
+							},
+							RequestsByCriteriaWs: {
+								type: webService,
+								url: 'app/res/requests/byCriteria',
+								input: RequestsByCriteriaWsInput,
+								output: {
+									type: list,
+									itemType: Request
+								}
+							},
+							SaveRequestWs: {
+								type: webService,
+								url: 'app/res/requests/save',
+								input: Request,
+								output: bool
+							}
+						}
+					},
+					customers: {
+						CustomersByCriteriaWsInput: {
+							type: entity,
+							properties: {
+								code: str,
+								name: str,
+								city: str
+							}
+						},
+						CustomersByCriteriaWs: {
+							name: CustomersByCriteriaWs,
+							type: webService,
+							url: 'app/res/customers/byCriteria',
+							input: CustomersByCriteriaWsInput,
+							output: {
+								type: list,
+								itemType: Customer
+							}
+						}
+					}
+				}
 			}
-		},
-		{
-			name: RequestsByCriteriaWs,
-			type: webService,
-			url: 'app/res/requests/byCriteria',
-			input: RequestsByCriteriaWsInput,
-			output: {
-				type: list,
-				itemType: Request
-			}
-		},
-		{
-			name: SaveRequestWs,
-			type: webService,
-			url: 'app/res/requests/save',
-			input: Request,
-			output: bool
 		}
-	],
-	'ecom.webServices.customers': [
-		{
-			name: CustomersByCriteriaWsInput,
-			type: obj,
-			properties: {
-				code: str,
-				name: str,
-				city: str
-			}
-		},
-		{
-			name: CustomersByCriteriaWs,
-			type: webService,
-			url: 'app/res/customers/byCriteria',
-			input: CustomersByCriteriaWsInput,
-			output: {
-				type: list,
-				itemType: Customer
-			}
-		}
-	]
+	}
 };
 
 var CustomerSearchForm = 'CustomerSearchForm';
@@ -313,7 +322,7 @@ add(webServices, sendy);
 add(userInterface, sendy);
 
 
-writeFile('output.json', JSON.stringify(sendy, null, 4));
+writeFile('output.json', JSON.stringify(model, null, 4));
 //console.log(toType(reqMainPage.$view));
 //console.log(reqMainPage.$view.length);
 //console.log(JSON.stringify(Country, null, 2));
